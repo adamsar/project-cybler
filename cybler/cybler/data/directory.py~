@@ -1,0 +1,4 @@
+"""This module defines methods for grabbing Listing items"""
+
+def get_listing(listing_id):
+    """Get listing back 
