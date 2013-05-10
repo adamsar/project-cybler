@@ -1,6 +1,7 @@
 from pyramid.view import view_config
 import cybler.resources
 from pyramid.httpexceptions import HTTPFound
+import pyramid.httpexceptions as exc
 
 #this line defines our root view
 @view_config(context=cybler.resources.Root)
@@ -11,7 +12,20 @@ def my_view(request):
     
 
 #this handles our 404 not found view
-@view_config(context='pyramid.httpexceptions.HTTPNotFound', renderer='templates/404_error.pt')
+@view_config(context=exc.HTTPNotFound, renderer='json')
 def not_found(request):
-    return{'message': 'Error 404, Page Not Found',
-           'cur_page': '', 'page_title': 'Requested Page Not Found'}
+    """Default handler for 404s"""
+    return {
+        "error": "Not found",
+        "code": 404,
+        "message": "The requested resource was not found"
+        }
+
+@view_config(context=exc.HTTPBadRequest, renderer='json')
+def bad_request(request):
+    """Default handler for 400s"""
+    return {
+        "error": "Bad Request",
+        "code": 400,
+        "message": "The data supplied to complete the request was malformed"
+    }

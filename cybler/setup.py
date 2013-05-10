@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.txt')).read()
 
-requires = ['pyramid', 'WebError', 'pymongo']
+requires = ['pyramid', 'WebError', 'pymongo', 'httplib2', 'feedparser']
 
 setup(name='cybler',
       version='0.0',
@@ -17,16 +17,16 @@ setup(name='cybler',
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
         ],
-      author="Niall O'Higgins",
-      author_email='nialljohiggins@gmail.com',
-      url='https://github.com/niallo/pyramid_mongodb',
-      keywords='web pyramid pylons mongodb',
+      author="AABG Productions",
+      author_email='adamsar@gmail.com',
+      url='',
+      keywords='',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
       install_requires=requires,
       tests_require=requires,
-      test_suite="cybler",
+      test_suite="tests",
       entry_points = """\
       [paste.app_factory]
       main = cybler:main

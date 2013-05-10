@@ -1,4 +1,5 @@
 from cybler.data import directory
+from bson.errors import InvalidId
 import logging
 log = logging.getLogger(__name__)
 
@@ -40,7 +41,10 @@ class MongoResource(object):
         self.data = None
         
         if _id:
-            self.data = directory.get_listing(self.request.db, _id)
+            try:
+                self.data = directory.get_listing(self.request.db, _id)
+            except InvalidId:
+                self.data = None
             if not self.data:
                 #Kick a 404 out if you try to get a non-existent resource
                 raise KeyError

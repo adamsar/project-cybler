@@ -1,3 +1,5 @@
 pyramid
 WebError
 pymongo
+httplib2
+feedparser
