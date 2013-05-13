@@ -41,6 +41,7 @@ def post(listing, request):
 
     Optional:
       id
+      url
       place_name
       country
       state
@@ -49,7 +50,8 @@ def post(listing, request):
       lat
       lon
       zip
-      image    
+      image
+      type
     """
     
     params = request.params
@@ -77,6 +79,8 @@ def post(listing, request):
 
     #Extract optional parameters
     _id = params.get("id")
+    _type = params.get("type")
+    url = params.get("url")
     country = params.get("country")
     state = params.get("state")    
     address = params.get("address")
@@ -105,7 +109,7 @@ def post(listing, request):
                                                              zipcode=zipcode)
         lat, lon = geolocation.decode_to_latlon(assumed_address)
         
-    image = params.get("image")
+    images = params.get("images")
     description = params.get("description")
 
     #Add ContactInformation into mongo
@@ -124,14 +128,17 @@ def post(listing, request):
     
     #Add into MongoDB
     listing_data = {
+        "type": _type,
+        "url": url,
         "createdOn": datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'),
         "title": title,
         "description": description,
-        "image": image,
+        "images": images.split(",") if images else None,
         "contact": contact_id
     }
     if _id:
         listing_data["_id"] = str(_id)
+
     listing_id = listing.collection.insert(listing_data)
 
     log.debug("New listing add with id: (%s)" % str(listing_id))

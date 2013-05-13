@@ -1,0 +1,20 @@
+http://kc.backpage.com/online/exports/Rss.xml?section=4381&category=4443,KS,Kansas City
+http://birmingham.backpage.com/online/exports/Rss.xml?section=4381&category=4443,AL,Birmingham
+http://indianapolis.backpage.com/online/exports/Rss.xml?section=446263&category=446832,IN,Indianapolis
+http://oklahomacity.backpage.com/online/exports/Rss.xml?section=4381&category=4443,OK,Oklahoma City
+http://omaha.backpage.com/online/exports/Rss.xml?section=4381&category=4443,NE,Omaha
+http://louisville.backpage.com/online/exports/Rss.xml?section=4381&category=4443,KY,Louisville
+http://columbus.backpage.com/online/exports/Rss.xml?section=4381&category=4443,OH,Columbus
+http://stlouis.backpage.com/online/exports/Rss.xml?section=4381&category=4443,MO,St. Louis
+http://boston.backpage.com/online/exports/Rss.xml?section=4381&category=4443,MA,Boston
+http://losangeles.backpage.com/online/exports/Rss.xml?section=4381&category=4443,CA,Los Angeles
+http://phoenix.backpage.com/online/exports/Rss.xml?section=4381&category=4443,AZ,Phoenix
+http://dallas.backpage.com/online/exports/Rss.xml?section=4381&category=4443,TX,Dallas
+http://miami.backpage.com/online/exports/Rss.xml?section=4381&category=4443,FL,Miami
+http://denver.backpage.com/online/exports/Rss.xml?section=4381&category=4443,CO,Denver
+http://portland.backpage.com/online/exports/Rss.xml?section=55846&category=55861,OR,Portland
+http://washingtondc.backpage.com/online/exports/Rss.xml?section=4381&category=4443,DC,Washington
+http://milwaukee.backpage.com/online/exports/Rss.xml?section=4381&category=4443,WI,Milwaukee
+http://seattle.backpage.com/online/exports/Rss.xml?section=4381&category=4443,WA,Seattle
+http://atlanta.backpage.com/online/exports/Rss.xml?section=4381&category=4443,GA,Atlanta
+http://chicago.backpage.com/online/exports/Rss.xml?section=4381&category=4443,IL,Chicago

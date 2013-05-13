@@ -9,7 +9,10 @@ COLLECTION = "listing"
 def get_listing(db, listing_id):
     """Get listing from mongodb properly massaged for use in python/json"""
     if not isinstance(listing_id, ObjectId):
-        listing_id = ObjectId(listing_id)
+        try:
+            listing_id = ObjectId(listing_id)
+        except:
+            pass #It's ok, it's not a mongo id
     log.debug("Looking up listing with id: (%s)" % str(listing_id))
     listing = db[COLLECTION].find_one({"_id": listing_id})
     if listing:
@@ -30,6 +33,9 @@ def get_listings(db, assumed_address=None, lat=None, lon=None):
 def remove_listing(db, listing_id):
     """Removes a listing from mongo"""
     if not isinstance(listing_id, ObjectId):
-        listing_id = ObjectId(listing_id)
+        try:
+            listing_id = ObjectId(listing_id)
+        except:
+            pass #It's ok not to be a mongo id
     log.debug("Removing listing (%s)" % str(listing_id))
     db[COLLECTION].remove({"_id": listing_id})

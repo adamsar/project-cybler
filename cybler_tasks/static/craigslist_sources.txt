@@ -1,0 +1,20 @@
+http://newyork.craigslist.org/search/cas/?query=w4m&format=rss,NY,New York
+http://philadelphia.craigslist.org/search/cas/?query=w4m&format=rss,PA,Philadelphia
+http://sanfrancisco.craigslist.org/search/cas/?query=w4m&format=rss,CA,San Francisco
+http://sandiego.craigslist.org/search/cas/?query=w4m&format=rss,CA,San Diego
+http://houston.craigslist.org/search/cas/?query=w4m&format=rss,TX,Houston
+http://jacksonville.craigslist.org/search/cas/?query=w4m&format=rss,FL,Jacksonville
+http://hartford.craigslist.org/search/cas/?query=w4m&format=rss,CT,Hartford
+http://desmoines.craigslist.org/search/cas/?query=w4m&format=rss,IA,Des Moines
+http://neworleans.craigslist.org/search/cas/?query=w4m&format=rss,LA,New Orleans
+http://baltimore.craigslist.org/search/cas/?query=w4m&format=rss,MD,Baltimore
+http://billings.craigslist.org/search/cas/?query=w4m&format=rss,MT,Billings
+http://lasvegas.craigslist.org/search/cas/?query=w4m&format=rss,NV,Las Vegas
+http://charlotte.craigslist.org/search/cas/?query=w4m&format=rss,NC,Charlotte
+http://cleveland.craigslist.org/search/cas/?query=w4m&format=rss,OH,Cleveland
+http://tulsa.craigslist.org/search/cas/?query=w4m&format=rss,OK,Tulsa
+http://nashville.craigslist.org/search/cas/?query=w4m&format=rss,TN,Nashville
+http://austin.craigslist.org/search/cas/?query=w4m&format=rss,TX,Austin
+http://jackson.craigslist.org/search/cas/?query=w4m&format=rss,MS,Jackson
+http://bismarck.craigslist.org/search/cas/?query=w4m&format=rss,ND,Bismarck
+http://morgantown.craigslist.org/search/cas/?query=w4m&format=rss,WV,Morgantown

@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.txt')).read()
 
-requires = ['pyramid', 'WebError', 'pymongo', 'httplib2', 'feedparser']
+requires = ['pyramid', 'WebError', 'pymongo', 'httplib2']
 
 setup(name='cybler',
       version='0.0',

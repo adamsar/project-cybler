@@ -15,6 +15,7 @@ def my_view(request):
 @view_config(context=exc.HTTPNotFound, renderer='json')
 def not_found(request):
     """Default handler for 404s"""
+    request.response.status = 404    
     return {
         "error": "Not found",
         "code": 404,
@@ -24,6 +25,7 @@ def not_found(request):
 @view_config(context=exc.HTTPBadRequest, renderer='json')
 def bad_request(request):
     """Default handler for 400s"""
+    request.response.status = 400
     return {
         "error": "Bad Request",
         "code": 400,
