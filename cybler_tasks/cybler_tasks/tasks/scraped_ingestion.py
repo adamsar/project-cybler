@@ -29,6 +29,6 @@ def ingest_craigslist():
     for entry in entries:
         url, state, city = entry.split(",")
         print "Processing %s" % url
-        feed_scraper.process_craiglist(url, city, state)
+        feed_scraper.process_craigslist(url, city, state)
 
     

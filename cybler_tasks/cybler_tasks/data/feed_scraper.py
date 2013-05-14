@@ -139,11 +139,16 @@ def process_craigslist(rss_url, city, state):
         images = [img.attrs['src'].replace("thumb/", "") for img in soup.find_all('img') if "thumb" in img.attrs['src']]
         listing_body = soup.find("section", {"id": "postingbody"})
         if listing_body:
-            listing_body = "".join([str(i.encode("utf-8") for i in listing_body.contents])
+            listing_body = "".join([str(i.encode("utf-8")) for i in listing_body.contents])
         else:
             listing_body = ""
             
-        checkable_containers = soup.find("ul", "blurbs").find_all("li")
+        checkable_containers = soup.find("ul", "blurbs")
+        if checkable_containers:
+            checkable_containers = checkable_containers.find_all("li")
+        else:
+            checkable_containers = []
+            
         location_data = ""
         for container in checkable_containers:
             if "Location" in container.contents[0]:
@@ -183,7 +188,7 @@ def process_craigslist(rss_url, city, state):
         #Massage any unicode data
         item['title'] = item['title'].encode('utf-8')
         item['description'] = item['description'].encode('utf-8')
-        item['images'] = images.join(",")
+        item['images'] = ",".join(images)
         return CyblerAPI().insert("listing", data=item)            
             
 
