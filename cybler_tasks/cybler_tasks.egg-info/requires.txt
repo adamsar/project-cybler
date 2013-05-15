@@ -2,3 +2,6 @@ httplib2
 feedparser
 lxml
 BeautifulSoup4
+numpy
+nltk
+scikit-learn

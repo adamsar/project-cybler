@@ -43,6 +43,8 @@ def process_backpage(rss_url, city, state):
         listing_body = soup.find("div", "postingBody")
         if listing_body:
             listing_body = "".join([str(i.encode("utf-8")) for i in listing_body.contents])
+            item['description'] = listing_body
+            
         checkable_containers = soup.find_all("div")
         location_data = ""
         for container in checkable_containers:
@@ -75,8 +77,7 @@ def process_backpage(rss_url, city, state):
             item['images'] = ",".join(images)
         if phone_number:
             item['phone_number'] = phone_number
-        if not item['description'] and listing_body:
-            item['description'] = listing_body
+            
         #Massage any unicode data
         item['title'] = item['title'].encode('utf-8')
         item['description'] = item['description'].encode('utf-8')
@@ -140,6 +141,7 @@ def process_craigslist(rss_url, city, state):
         listing_body = soup.find("section", {"id": "postingbody"})
         if listing_body:
             listing_body = "".join([str(i.encode("utf-8")) for i in listing_body.contents])
+            item['description'] = listing_body
         else:
             listing_body = ""
             
@@ -187,7 +189,6 @@ def process_craigslist(rss_url, city, state):
             
         #Massage any unicode data
         item['title'] = item['title'].encode('utf-8')
-        item['description'] = item['description'].encode('utf-8')
         item['images'] = ",".join(images)
         return CyblerAPI().insert("listing", data=item)            
             
