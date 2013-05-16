@@ -17,6 +17,7 @@ log = logging.getLogger(__name__)
 LISTING_COLLECTION = "listing"
 CONTACT_COLLECTION = "contactInfo"
 
+@task
 def process_backpage(rss_url, city, state):
     """
     Processes a backpage rss feed. Requires a link to the rss_url,
@@ -62,16 +63,16 @@ def process_backpage(rss_url, city, state):
             #TODO massage this later
             item['address'] = location_data
 
-        lat, lon = None, None
-        try:
-            assumed_address = geolocation.get_best_guess_address(country="USA",
-                                                                 address=location_data)
-            lat, lon = geolocation.decode_to_latlon(assumed_address)
-        except:
-            pass
-        if lat and lon:
-            item['lat'] = lat
-            item['lon'] = lon
+        # lat, lon = None, None
+        # try:
+        #     assumed_address = geolocation.get_best_guess_address(country="USA",
+        #                                                          address=location_data)
+        #     lat, lon = geolocation.decode_to_latlon(assumed_address)
+        # except:
+        #     pass
+        # if lat and lon:
+        #     item['lat'] = lat
+        #     item['lon'] = lon
             
         if images:
             item['images'] = ",".join(images)
@@ -118,7 +119,7 @@ def process_backpage(rss_url, city, state):
 
     return listings
 
-    
+@task    
 def process_craigslist(rss_url, city, state):
     """
     Processes and generates listings for a craiglist casual encounters
@@ -171,19 +172,17 @@ def process_craigslist(rss_url, city, state):
             #TODO massage this later
             item['address'] = location_data
 
-        lat, lon = None, None
-        try:
-            assumed_address = geolocation.get_best_guess_address(country="USA",
-                                                                 address=location_data)
-            lat, lon = geolocation.decode_to_latlon(assumed_address)
-        except:
-            pass
-        if lat and lon:
-            item['lat'] = lat
-            item['lon'] = lon
+        # lat, lon = None, None
+        # try:
+        #     assumed_address = geolocation.get_best_guess_address(country="USA",
+        #                                                          address=location_data)
+        #     lat, lon = geolocation.decode_to_latlon(assumed_address)
+        # except:
+        #     pass
+        # if lat and lon:
+        #     item['lat'] = lat
+        #     item['lon'] = lon
             
-#        if images:
-#            item['images'] = ",".join(images)
         if phone_number:
             item['phone_number'] = phone_number
             

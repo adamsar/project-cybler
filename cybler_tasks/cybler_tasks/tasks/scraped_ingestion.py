@@ -5,10 +5,12 @@ Tasks for ingestion done by web scraping. For the moment this includes:
 +craigslist casual encounters
 """
 import os.path
+from celery import task
 from cybler_tasks.data import feed_scraper
 CRAIGS_LIST_FILE = os.path.join(os.path.dirname(__file__), "../../static/craigslist_sources.txt")
 BACKPAGE_LIST_FILE = os.path.join(os.path.dirname(__file__), "../../static/backpage_sources.txt")
 
+@task
 def ingest_backpage():
     """Ingests all backpage entries
     """
@@ -17,10 +19,9 @@ def ingest_backpage():
     for entry in entries:
         url, state, city = entry.split(",")
         print "Processing %s" % url
-        feed_scraper.process_backpage(url, city, state)
+        feed_scraper.process_backpage.delay(url, city, state)
 
-    
-
+@task
 def ingest_craigslist():
     """Ingests all backpage entries
     """
@@ -29,6 +30,6 @@ def ingest_craigslist():
     for entry in entries:
         url, state, city = entry.split(",")
         print "Processing %s" % url
-        feed_scraper.process_craigslist(url, city, state)
+        feed_scraper.process_craigslist.delay(url, city, state)
 
     
