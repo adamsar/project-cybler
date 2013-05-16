@@ -2,6 +2,7 @@
 Feed parsing using feedparser and some url scraping
 """
 
+from celery import task
 from cybler_tasks.lib import geolocation, text, scraper
 from cybler_tasks.data.cybler_api import CyblerAPI
 
