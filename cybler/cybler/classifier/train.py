@@ -1,6 +1,7 @@
 """
 Defines methods for training data
 """
+import os.path
 import re
 import numpy as np
 from nltk.probability import FreqDist
@@ -11,6 +12,12 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_selection import SelectKBest, chi2
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
+
+POSITIVE_DOC = os.path.join(os.path.dirname(__file__), "training_docs/positive_esc.txt")
+NEGATIVE_DOC = os.path.join(os.path.dirname(__file__), "training_docs/negative_esc.txt")
+
+POSITIVE_LABEL = "escort"
+NEGATIVE_LABEL = "notescort"
 
 pipeline = Pipeline([('tfidf', TfidfTransformer()),
                      ('chi2', SelectKBest(chi2, k=1000)),
@@ -47,5 +54,14 @@ def train(category, text):
     features = get_features(tokenize(text))
     print features
     classifier.train([(features, category)])
-                
-        
+
+    
+def full_train():
+    """
+    Fully trains the classifier for use in categorizing listings
+    """
+
+    text_negative = open(NEGATIVE_DOC, "rb").read().split("\n==========\n")
+    text_positive = open(POSITIVE_DOC, "rb").read().split("\n==========\n")
+    
+    
