@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-requires = ['httplib2', 'feedparser', 'lxml', 'BeautifulSoup4', 'numpy', 'scipy', 'nltk', 'scikit-learn']
+requires = ['httplib2', 'feedparser', 'lxml', 'BeautifulSoup4', 'celery']
 
 setup(name='cybler_tasks',
       version='0.0',

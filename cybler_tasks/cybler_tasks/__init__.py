@@ -29,7 +29,7 @@ def setup_app(config_file):
 
     #Setup mongo    
     log.debug("Setting up mongo")
-    from cybler_tasks.lib import mongo
-    mongo.db = MongoClient(config.get('cybler_tasks', 'mongo.host'),
-                           int(config.get('cybler_tasks', 'mongo.port')))[config.get('cybler_tasks', 'mongo.db')]
+#    from cybler_tasks.lib import mongo
+#    mongo.db = MongoClient(config.get('cybler_tasks', 'mongo.host'),
+#                           int(config.get('cybler_tasks', 'mongo.port')))[config.get('cybler_tasks', 'mongo.db')]
     
