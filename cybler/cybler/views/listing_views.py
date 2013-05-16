@@ -25,7 +25,18 @@ def get(listing, request):
     """
     request.response.status = http_statuses.OK
     if listing.data is None:
-        return directory.get_listings(listing.request.db)        
+        params = request.params
+        rows = params.get("rows")
+        start = params.get("start")
+        city = params.get("city")
+        query = {
+            "city": city
+            }
+        if rows:
+            query["rows"] = int(rows)
+        if start:
+            query["start"] = int(start)
+        return directory.get_listings(listing.request.db, **query)
     return listing.data
 
     
