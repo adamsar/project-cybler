@@ -1,6 +1,7 @@
 """This module defines methods for grabbing Listing items as it intended to be a Directory
 for the listings"""
 from bson.objectid import ObjectId
+import pymongo
 
 import logging
 log = logging.getLogger(__name__)
@@ -24,9 +25,16 @@ def get_listing(db, listing_id):
     return listing
 
     
-def get_listings(db, city=None, assumed_address=None, lat=None, lon=None, rows=10, start=0):
+def get_listings(db, all_fields=False, city=None, assumed_address=None,
+                 lat=None, lon=None, rows=10, start=0):
     """Gets a bunch of listings based on criteria TBD"""
     #TODO: Assumed address integration
+    fields = ["_id", "title", "description"] if not all_fields else ["_id",
+                                                                     "title",
+                                                                     "type",
+                                                                     "images",
+                                                                     "description",
+                                                                     "url"]
     query = {}
     if city:
         query['city'] = city
@@ -46,9 +54,9 @@ def get_listings(db, city=None, assumed_address=None, lat=None, lon=None, rows=1
             "contact": {
                 "$in": possible_contacts                
                 }
-            }, fields=["_id", "title", "description"])[start:start+rows]]
+            }, fields=fields).sort([("createdOn", pymongo.DESCENDING)])[start:start+rows]]
     else:
-        listings = [l for l in db[COLLECTION].find(fields=["_id", "title", "description"])[start:start+rows]]
+        listings = [l for l in db[COLLECTION].find(fields=fields).sort([("createdOn", pymongo.DESCENDING)])[start:start+rows]]
     for listing in listings:
         listing["_id"] = str(listing["_id"])
     return listings

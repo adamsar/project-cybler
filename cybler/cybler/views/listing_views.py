@@ -59,7 +59,7 @@ def debug_list(listing, request):
         query["rows"] = int(rows)
     if start:
         query["start"] = int(start)
-    return {"listings": directory.get_listings(listing.request.db, **query)}
+    return {"listings": directory.get_listings(listing.request.db, all_fields=True, **query)}
 
     
 #RESOURCE: POST:/listing/

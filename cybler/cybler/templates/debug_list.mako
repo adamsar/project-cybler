@@ -7,7 +7,7 @@
   <ul>
   % for entry in listings:
     <li>
-      <a href="${entry["link"]}">${entry["title"]}</a>
+      <a href="${entry["url"]}">${entry["title"]}</a>
       <hr/>
       <div>
         ${entry["description"]}
@@ -18,8 +18,8 @@
       <div>
         Images:
         <ul>
-          % for image in entry["images"]:
-            <li><img src="image"/></li>
+          % for image in entry.get("images", []) or []:
+            <li><img src="${image.replace("'", "").replace("[", "")}"/></li>
           % endfor
         </ul>
       </div>
