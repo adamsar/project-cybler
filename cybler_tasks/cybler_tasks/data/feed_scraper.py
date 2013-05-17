@@ -31,7 +31,7 @@ def build_listing_backpage(item):
         listing_body = soup.find("div", "postingBody")
         if listing_body:
             listing_body = "".join([str(i.encode("utf-8")) for i in listing_body.contents])
-            item['description'] = listing_body
+            item['description'] = listing_body.encode("utf-8")
             
         checkable_containers = soup.find_all("div")
         location_data = ""
@@ -89,8 +89,8 @@ def process_backpage(rss_url, city, state):
             "url": item['link'],
             "city": city,
             "state": state,
-            "title": item["title"].encode("utf-8"),
-            "description": item.get("summary", "").encode("utf-8"),
+            "title": item["title"].encode("utf-8", "replace"),
+            "description": item.get("summary", "").encode("utf-8", "replace"),
             "type": "backpage"
             }
         return data
@@ -114,7 +114,7 @@ def build_listing_craigslist(item):
         images = [img.attrs['src'].replace("thumb/", "") for img in soup.find_all('img') if "thumb" in img.attrs['src']]
         listing_body = soup.find("section", {"id": "postingbody"})
         if listing_body:
-            listing_body = "".join([str(i.encode("utf-8")) for i in listing_body.contents])
+            listing_body = "".join([str(i.encode("utf-8", "replace")) for i in listing_body.contents])
             item['description'] = listing_body
         else:
             listing_body = ""
@@ -171,8 +171,8 @@ def process_craigslist(rss_url, city, state):
             "url": item['link'],
             "city": city,
             "state": state,
-            "title": item["title"].encode("utf-8"),
-            "description": item["summary"].encode("utf-8"),
+            "title": item["title"].encode("utf-8", "replace"),
+            "description": item["summary"].encode("utf-8", "replace"),
             "type": "craigslist"
             }
         return data
@@ -221,7 +221,6 @@ def process_adultsearch(rss_url, city, state):
     #Return data on all listings in feed if they are not in mongo
     def get_listing(item):
         #If not, then update
-        content = urllib.urlopen(item['link']).read()
         data = {
             "id": text.url_to_id(item['id']),
             "url": item['link'],
@@ -229,8 +228,8 @@ def process_adultsearch(rss_url, city, state):
             "state": state,
             "lat": city_lat,
             "lon": city_lon,
-            "title": item["title"].encode("utf-8"),
-            "description": item["summary"].encode("utf-8"),
+            "title": item["title"].encode("utf-8", "replace"),
+            "description": item["summary"].encode("utf-8", "replace"),
             "type": "adultsearch"
             }
         return data

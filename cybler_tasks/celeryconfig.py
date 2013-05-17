@@ -11,5 +11,10 @@ CELERYBEAT_SCHEDULE = {
     "ingest-backpage": {
         "task": "celery_tasks.tasks.scraped_ingestion.ingest_backpage",
         "schedule": timedelta(seconds=60*30), #Every 30 minutes
-        }
+        },
+    "ingest-adultsearch": {
+        "task": "celery_tasks.tasks.scraped_ingestion.ingest_adultsearch",
+        "schedule": timedelta(seconds=60*30), #Every 30 minutes
+        }    
     }
+

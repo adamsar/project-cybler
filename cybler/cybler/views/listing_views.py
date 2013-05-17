@@ -173,7 +173,6 @@ def post(listing, request):
         listing_data["_id"] = str(_id)
 
     listing_id = listing.collection.insert(listing_data)
-
     log.debug("New listing add with id: (%s)" % str(listing_id))
     request.response.status = http_statuses.CREATED
     
