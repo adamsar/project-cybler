@@ -39,6 +39,28 @@ def get(listing, request):
         return directory.get_listings(listing.request.db, **query)
     return listing.data
 
+#RESOURCE - GET:/listing/debug_list
+@view_config(context=cybler.resources.Listing,
+             request_method='GET',
+             name="debug_list",
+             renderer="debug_list.mako")
+def debug_list(listing, request):
+    """
+    Displays a pretty-printed html list for debugging listings
+    """
+    params = request.params
+    rows = params.get("rows")
+    start = params.get("start")
+    city = params.get("city")
+    query = {
+        "city": city
+    }
+    if rows:
+        query["rows"] = int(rows)
+    if start:
+        query["start"] = int(start)
+    return {"listings": directory.get_listings(listing.request.db, **query)}
+
     
 #RESOURCE: POST:/listing/
 @view_config(context=cybler.resources.Listing, request_method='POST', renderer="json")

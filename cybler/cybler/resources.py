@@ -59,6 +59,7 @@ class Listing(MongoResource):
     __collection_name__ = "listing"
 
     def __getitem__(self, listing_id):
-        if listing_id:
+        if listing_id and listing_id != "debug_list":
             return Listing(self.request, _id=listing_id)
+        raise KeyError
         

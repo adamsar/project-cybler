@@ -6,8 +6,6 @@ cybler_tasks.egg-info/dependency_links.txt
 cybler_tasks.egg-info/not-zip-safe
 cybler_tasks.egg-info/requires.txt
 cybler_tasks.egg-info/top_level.txt
-cybler_tasks/classifier/__init__.py
-cybler_tasks/classifier/train.py
 cybler_tasks/data/__init__.py
 cybler_tasks/data/cybler_api.py
 cybler_tasks/data/feed_scraper.py
