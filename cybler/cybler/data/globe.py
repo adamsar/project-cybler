@@ -126,8 +126,9 @@ def insert_city(db, city, state):
                 "country": country.lower(),
                 "city": city.lower(),
                 "state": state,
-                "lat": float(latitude),
-                "lon": float(longitude)
+                "loc": {
+                    "lat": float(latitude),
+                    "lon": float(longitude)
                 }
             break
             

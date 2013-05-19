@@ -30,8 +30,8 @@ def build_listing_backpage(item):
         
         listing_body = soup.find("div", "postingBody")
         if listing_body:
-            listing_body = "".join([str(i.encode("utf-8", "replace")) for i in listing_body.contents])
-            item['description'] = listing_body.encode("utf-8", "replace")
+            listing_body = "".join([str(i).encode("utf-8", "replace") for i in listing_body.contents])
+            item['description'] = listing_body
             
         checkable_containers = soup.find_all("div")
         location_data = ""
