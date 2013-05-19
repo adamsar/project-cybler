@@ -30,7 +30,7 @@ def build_listing_backpage(item):
         
         listing_body = soup.find("div", "postingBody")
         if listing_body:
-            listing_body = "".join([str(i) for i in listing_body.contents])
+            listing_body = "".join([unicode(i) for i in listing_body.contents])
             item['description'] = listing_body
             
         checkable_containers = soup.find_all("div")
