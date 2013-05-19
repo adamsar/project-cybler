@@ -49,17 +49,6 @@ def build_listing_backpage(item):
         if location_data:
             #TODO massage this later
             item['address'] = location_data
-
-        # lat, lon = None, None
-        # try:
-        #     assumed_address = geolocation.get_best_guess_address(country="USA",
-        #                                                          address=location_data)
-        #     lat, lon = geolocation.decode_to_latlon(assumed_address)
-        # except:
-        #     pass
-        # if lat and lon:
-        #     item['lat'] = lat
-        #     item['lon'] = lon
             
         if images:
             item['images'] = ",".join(images)
@@ -244,3 +233,68 @@ def process_adultsearch(rss_url, city, state):
     new_listings = map(get_listing, new_listings)
     for data in new_listings:
         build_listing_adultsearch.delay(data)
+
+@task
+def build_naughtyreviews(listing):
+    """
+    Scrapes and completes a naughty review listing. Then updates the api with the data
+    """
+    
+    soup = BeautifulSoup(urllib.urlopen(listing['url']).read())
+    
+    #Get the full text, the RSS feed doesn't have this for now    
+    body = text.format_contents(soup.find("div", "classified_ad"))
+    #Next try for images
+    images = []
+    img_link_container = soup.find("span", "value")
+    if img_link_container:
+        img_links = img_link_container.find_all("a")
+        if img_links:
+                images = [link.attrs['href'] for link in img_links if 'href' in link.attrs]
+    #Now contact information
+    email = text.extract_email(body)
+    phone_number = text.extract_phone_number(body)
+
+    #Combine it all together
+    listing.update({
+            "description": body,
+            "phone_number": phone_number,
+            "email": email
+            })
+    #Push it out to the API
+    return CyblerAPI().insert("listing", listing)
+    
+@task
+def process_naughtyreview(rss_url, city, state):
+    city_address = geolocation.get_best_guess_address(city=city, state=state)
+    city_lat, city_lon = geolocation.decode_to_latlon(city_address)
+
+
+    #Return data on all listings in feed if they are not in mongo
+    def get_listing(item):
+        #If not, then update
+        data = {
+            "id": text.url_to_id(item['id']),
+            "url": item['link'],
+            "city": city,
+            "state": state,
+            "lat": city_lat,
+            "lon": city_lon,
+            "title": item["title"].encode("utf-8", "replace"),
+            "description": None,
+            "type": "naughtyreviews"
+            }
+        return data
+    
+    #Grab un processed listings
+    feed = feedparser.parse(rss_url)
+    new_listings = [item for item in feed['items'] \
+                    if not CyblerAPI().get("listing", _id=text.url_to_id(item['id']))][:1]
+
+    #And the main algorithm, build listings with feed items and combine them with scraped data
+    #then persist to mongo
+    new_listings = map(get_listing, new_listings)
+    listings = []
+    for data in new_listings:
+        listing = build_naughtyreviews.delay(data)
+    

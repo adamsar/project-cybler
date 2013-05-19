@@ -10,6 +10,7 @@ from cybler_tasks.data import feed_scraper
 ADULTSEARCH_FILE = os.path.join(os.path.dirname(__file__), "../../static/adultsearch_sources.txt")
 CRAIGS_LIST_FILE = os.path.join(os.path.dirname(__file__), "../../static/craigslist_sources.txt")
 BACKPAGE_LIST_FILE = os.path.join(os.path.dirname(__file__), "../../static/backpage_sources.txt")
+NAUGHTYREVIEW_FILE = os.path.join(os.path.dirname(__file__), "../../static/naughtyreviews_sources.txt")
 
 @task
 def ingest_backpage():
@@ -42,3 +43,13 @@ def ingest_adultsearch():
     for entry in entries:
         url, state, city = entry.split(",")
         feed_scraper.process_adultsearch.delay(url, city, state)
+
+
+@task
+def ingest_naughtyreview():
+    """Ingests all naughty review feeds"""
+    data = open(NAUGHTYREVIEW_FILE).read()
+    entries = data.split("\n")
+    for entry in entries:
+        url, state, city = entry.split(",")
+        feed_scraper.process_naughtyreview.delay(url, city, state)        

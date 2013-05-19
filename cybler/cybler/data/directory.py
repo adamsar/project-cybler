@@ -71,3 +71,24 @@ def remove_listing(db, listing_id):
             pass #It's ok not to be a mongo id
     log.debug("Removing listing (%s)" % str(listing_id))
     db[COLLECTION].remove({"_id": listing_id})
+
+def add_listing(db, listing):
+    """
+    Adds a listing to the data. To be stubbed for various permutations
+    """
+    #First check to see if the listing is actually in mongo
+    existing_listing = None
+    if "_id" in listing:
+        existing_listing = db[COLLECTION].find_one({"_id": listing["_id"]})
+        if not existing_listing and "url" in listing:
+            existing_listing = db[COLLECTION].find_one({"url": listing["url"]})
+
+    if existing_listing:
+        #Update the appropriate listings
+        if "createdOn" in listing: del listing["createdOn"]
+        existing_listing.update(listing)
+        db[COLLECTION].save(existing_listing)
+        return existing_listing["_id"]
+        
+    else:
+        return db[COLLECTION].insert(listing)

@@ -92,6 +92,7 @@ def post(listing, request):
     if "city" not in params or \
        "title" not in params or \
        ("email" not in params and "phone_number" not in params):
+        log.error("Invalid params for creating a listing")
         raise exc.HTTPBadRequest()
 
     #Extract required parameters
@@ -99,6 +100,8 @@ def post(listing, request):
     place_name = params.get("place_name")
     email = params.get("email")
     if email and "@" not in email:
+        log.error("Can't validate email")
+        log.error(email)
         raise exc.HTTPBadRequest()
         
     phone_number = params.get("phone_number")
@@ -106,6 +109,7 @@ def post(listing, request):
         try:
             phone_number = int(phone_number)
         except:
+            log.error("Bad phone number")
             raise exc.HTTPBadRequest()
             
     title = params["title"]
@@ -172,7 +176,7 @@ def post(listing, request):
     if _id:
         listing_data["_id"] = str(_id)
 
-    listing_id = listing.collection.insert(listing_data)
+    listing_id = directory.add_listing(request.db, listing_data)
     log.debug("New listing add with id: (%s)" % str(listing_id))
     request.response.status = http_statuses.CREATED
     

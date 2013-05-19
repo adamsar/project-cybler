@@ -32,10 +32,14 @@ class CyblerAPI(object):
         log.debug("Got bad response (%s), not returning data" % str(response))
         return None
 
+        
     def insert(self, resource, data={}):
         """
         Inserts a resource via the api
         """
+        #First remove any blank data
+        keys_to_remove = [key for key in data.keys() if not data[key]]
+        for key in keys_to_remove: del data[key]
         encoded_data = urllib.urlencode(data)
         full_url = "http://%s/%s" % (BASE_URL, resource)
         log.debug("Inserting a new %s with data %s" % (resource, encoded_data))
