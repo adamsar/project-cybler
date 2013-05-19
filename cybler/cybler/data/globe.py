@@ -130,6 +130,7 @@ def insert_city(db, city, state):
                     "lat": float(latitude),
                     "lon": float(longitude)
                 }
+            }
             break
             
         #Best guess if no state
