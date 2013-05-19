@@ -13,12 +13,14 @@ BASE_URL = None
 
 class CyblerAPI(object):
 
-    def get(self, resource, _id=None):
+    def get(self, resource, _id=None, rows=None, start=None):
         """
         Retrieves a resource on the api.
         """
         
         suffix = "/%s" % resource if _id is None else "/%s/%s" % (resource, urllib.quote(_id))
+        if rows and start:
+            suffix += "?rows=%s&start=%s" = (str(rows), str(start))
         full_url = "http://" + BASE_URL + suffix
         log.debug("Hitting the internal API for (%s)" % full_url)
 

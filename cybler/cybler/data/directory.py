@@ -1,6 +1,7 @@
 """This module defines methods for grabbing Listing items as it intended to be a Directory
 for the listings"""
 from bson.objectid import ObjectId
+from cybler.data import globe
 import pymongo
 
 import logging
@@ -19,46 +20,41 @@ def get_listing(db, listing_id):
     listing = db[COLLECTION].find_one({"_id": listing_id})
     if listing:
         listing["_id"] = str(listing["_id"])
-        listing["contact"] = db["contactInfo"].find_one({"_id": ObjectId(listing["contact"])})
-        if listing["contact"]:
-            listing["contact"]["_id"] = str(listing["contact"]["_id"])
     return listing
 
     
-def get_listings(db, all_fields=False, city=None, assumed_address=None,
+def get_listings(db, all_fields=False, city=None,
+                 state=None,
+                 assumed_address=None,
                  lat=None, lon=None, rows=10, start=0):
     """Gets a bunch of listings based on criteria TBD"""
     #TODO: Assumed address integration
-    fields = ["_id", "title", "description"] if not all_fields else ["_id",
-                                                                     "title",
-                                                                     "type",
-                                                                     "images",
-                                                                     "description",
-                                                                     "url"]
+    fields = ["_id", "title", "description", "url"] if not all_fields else ["_id",
+                                                                            "title",
+                                                                            "type",
+                                                                            "images",
+                                                                            "description",
+                                                                            "url"]
+    sort = [("createdOn", pymongo.DESCENDING)]
     query = {}
-    if city:
-        query['city'] = city
+    if city and not lat and not lon:
+        city_entry = globe.get_city(db, city, state)
+        lat, lon = (city_entry['loc']['lat'], city_entry['loc']['lon'])
     if lat and lon:
         #Search within about a 30 mile square of the specified lat and lon
-        query["lat"] = {
-            "$gt": lat - .5,
-            "$lt": lat + .5            
-            }
-        query["lon"] = {
-            "$gt": lon - .5,
-            "$lt": lon + .5            
-            }
-    if query:
-        possible_contacts = [l['_id'] for l in db[CONTACT_COLLECTION].find(query, fields=["_id"])]
-        listings = [l for l in db[COLLECTION].find({
-            "contact": {
-                "$in": possible_contacts                
+        query = {
+            "loc": {
+                "$near": [lat, lon]
                 }
-            }, fields=fields).sort([("createdOn", pymongo.DESCENDING)])[start:start+rows]]
+            }
+        listings = [
+            l for l in db[COLLECTION].find(query, fields=fields).sort(sort)[start:start+rows]
+        ]
     else:
-        listings = [l for l in db[COLLECTION].find(fields=fields).sort([("createdOn", pymongo.DESCENDING)])[start:start+rows]]
+        listings = [l for l in db[COLLECTION].find(fields=fields).sort(sort)[start:start+rows]]
     for listing in listings:
         listing["_id"] = str(listing["_id"])
+        
     return listings
 
 
@@ -72,10 +68,26 @@ def remove_listing(db, listing_id):
     log.debug("Removing listing (%s)" % str(listing_id))
     db[COLLECTION].remove({"_id": listing_id})
 
-def add_listing(db, listing):
+    
+def add_listing(db, listing, city=None, state=None):
     """
     Adds a listing to the data. To be stubbed for various permutations
     """
+    if not city:
+        return
+
+    #Get city information 
+    cityEntry = globe.get_city(db, city, state)
+    if not cityEntry:
+        cityEntry = globe.insert_city(db, city, state)
+        cityEntry = globe.get_city(db, city, state)
+
+
+    listing['loc'] = {
+        "lat": cityEntry["loc"]["lat"],
+        "lon": cityEntry["loc"]["lon"]
+        }
+    
     #First check to see if the listing is actually in mongo
     existing_listing = None
     if "_id" in listing:

@@ -135,33 +135,17 @@ def post(listing, request):
         except:
             lon = None
 
-    zipcode = params.get("zip")
-
-    #Use google maps api to try to get a lat and lon if they weren't given
-    if not lat or not lon:
-        assumed_address = geolocation.get_best_guess_address(country=country,
-                                                             city=city,
-                                                             state=state,
-                                                             address=address,
-                                                             zipcode=zipcode)
-        lat, lon = geolocation.decode_to_latlon(assumed_address)
-        
+    zipcode = params.get("zip")        
     images = params.get("images")
     description = params.get("description")
 
     #Add ContactInformation into mongo
-    contact_id = listing.request.db["contactInfo"].insert({
+    contact_info = {
         "name": place_name,
-        "city": city,
-        "country": country,
-        "zipcode": zipcode,
-        "state": state,
-        "lon": lon,
-        "lat": lat,
         "address": address,
         "email": email,
         "phone_number": phone_number
-    })
+    }
     
     #Add into MongoDB
     listing_data = {
@@ -171,12 +155,12 @@ def post(listing, request):
         "title": title,
         "description": description,
         "images": images.split(",") if images else None,
-        "contact": contact_id
+        "contact": contact_info
     }
     if _id:
         listing_data["_id"] = str(_id)
 
-    listing_id = directory.add_listing(request.db, listing_data)
+    listing_id = directory.add_listing(request.db, listing_data, city=city, state=state)
     log.debug("New listing add with id: (%s)" % str(listing_id))
     request.response.status = http_statuses.CREATED
     
