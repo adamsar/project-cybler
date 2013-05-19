@@ -54,7 +54,7 @@ def get_listings(db, all_fields=False, city=None,
         listings = [l for l in db[COLLECTION].find(fields=fields).sort(sort)[start:start+rows]]
     for listing in listings:
         listing["_id"] = str(listing["_id"])
-g        
+        
     return listings
 
 
