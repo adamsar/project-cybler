@@ -18,9 +18,9 @@ class CyblerAPI(object):
         Retrieves a resource on the api.
         """
         
-        suffix = "/%s" % resource if _id is None else "/%s/%s" % (resource, urllib.quote(_id))
+        suffix = "/%s" % resource if _id is None else "/%s/%s" % (resource, urllib.quote(_id))        
         if rows and start:
-            suffix += "?rows=%s&start=%s" = (str(rows), str(start))
+            suffix += "?rows=%s&start=%s" % (str(rows), str(start))
         full_url = "http://" + BASE_URL + suffix
         log.debug("Hitting the internal API for (%s)" % full_url)
 
