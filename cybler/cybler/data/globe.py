@@ -108,9 +108,10 @@ def insert_city(db, city, state):
     """
     Attempted to extract a sity from geolocation lite and insert into mongodb
     """
+    city = city.lower()
     if state and len(state) > 2:        
         state = STATESF.get(state.lower())
-
+    if state: state = state.lower()
     all_entries = open(GEODATA_FILE).read().lower().split("\n")
     submitable = {}
     for entry in all_entries:

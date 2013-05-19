@@ -90,27 +90,19 @@ def post(listing, request):
     params = request.params
     #Quick validation, will update late
     if "city" not in params or \
-       "title" not in params or \
-       ("email" not in params and "phone_number" not in params):
-        log.error("Invalid params for creating a listing")
+       "title" not in params:
         raise exc.HTTPBadRequest()
 
     #Extract required parameters
     city = params["city"]
     place_name = params.get("place_name")
-    email = params.get("email")
-    if email and "@" not in email:
-        log.error("Can't validate email")
-        log.error(email)
-        raise exc.HTTPBadRequest()
-        
+    email = params.get("email")        
     phone_number = params.get("phone_number")
     if phone_number:
         try:
             phone_number = int(phone_number)
         except:
-            log.error("Bad phone number")
-            raise exc.HTTPBadRequest()
+            phone_number = None
             
     title = params["title"]
 

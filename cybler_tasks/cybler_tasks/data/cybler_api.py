@@ -42,6 +42,12 @@ class CyblerAPI(object):
         #First remove any blank data
         keys_to_remove = [key for key in data.keys() if not data[key]]
         for key in keys_to_remove: del data[key]
+        for key, value in data.iteritems():
+            if isinstance(value, unicode) or isinstance(value, basestring):
+                try:
+                    data[key] = value.encode('utf-8', 'replace')
+                except:
+                    continue
         encoded_data = urllib.urlencode(data)
         full_url = "http://%s/%s" % (BASE_URL, resource)
         log.debug("Inserting a new %s with data %s" % (resource, encoded_data))
