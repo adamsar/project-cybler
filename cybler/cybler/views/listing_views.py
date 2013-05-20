@@ -39,6 +39,7 @@ def get(listing, request):
         return directory.get_listings(listing.request.db, **query)
     return listing.data
 
+    
 #RESOURCE - GET:/listing/debug_list
 @view_config(context=cybler.resources.Listing,
              request_method='GET',

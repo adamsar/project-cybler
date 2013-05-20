@@ -20,6 +20,8 @@ class Root(object):
         log.debug("Root with key: (%s)" % key)
         if key == "listing":
             return Listing(self.request)
+        elif key == "city":
+            return City(self.request)
         elif key == "account":
             return Account(self.request)
         #Force a 404 if not a proper resource
@@ -63,3 +65,15 @@ class Listing(MongoResource):
             return Listing(self.request, _id=listing_id)
         raise KeyError
         
+class City(MongoResource):
+    """
+    A city that's in the DB
+    """
+    __name__ = ''
+    __parent__ = Root
+    __collection_name__ = "cities"
+
+    def __getitem__(self, city_id):
+        if city_id:
+            return City(self.request, _id=city_id)
+        raise KeyError

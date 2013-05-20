@@ -163,3 +163,12 @@ def insert_city(db, city, state):
             
     return db[COLLECTION].insert(submitable)
         
+
+def all_cities(db):
+    """
+    Returns all data
+    """
+    cities = [x for x in db[COLLECTION].find()]
+    for city in cities:
+        city['_id'] = str(city['_id'])
+    return cities
