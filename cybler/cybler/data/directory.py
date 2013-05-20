@@ -29,12 +29,12 @@ def get_listings(db, all_fields=False, city=None,
                  lat=None, lon=None, rows=10, start=0):
     """Gets a bunch of listings based on criteria TBD"""
     #TODO: Assumed address integration
-    fields = ["_id", "title", "description", "url"] if not all_fields else ["_id",
-                                                                            "title",
-                                                                            "type",
-                                                                            "images",
-                                                                            "description",
-                                                                            "url"]
+    fields = ["_id", "title", "description", "url", "images"] if not all_fields else ["_id",
+                                                                                      "title",
+                                                                                      "type",
+                                                                                      "images",
+                                                                                      "description",
+                                                                                      "url"]
     sort = [("createdOn", pymongo.DESCENDING)]
     query = {}
     if city and not lat and not lon:
