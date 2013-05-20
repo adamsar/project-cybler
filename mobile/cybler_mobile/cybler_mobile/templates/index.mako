@@ -25,7 +25,7 @@
             window.location.href = "/location"
           }
           function handle_geolocation_query(position){
-            window.location.href = "/listings?lat=" + position.coords.latitude +
+            window.location.href = "/listing?lat=" + position.coords.latitude +
                                   "&lon=" + position.coords.longitude +
                                   "&start=0";
           }
