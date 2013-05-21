@@ -28,5 +28,5 @@ ${listing["createdOn"]}
 </a>
 %endif
 
-<p>${listing["description"]</p>
+<p>${listing["description"]}</p>
 </%block>
