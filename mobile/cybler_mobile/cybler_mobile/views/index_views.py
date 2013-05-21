@@ -22,7 +22,7 @@ def location(request):
 
     #Format the city name a little bit
     for city in cities:
-        city['name'] = city['name'].title()
+        city['city'] = city['city'].title()
     return {
         "cities": cities
     }
