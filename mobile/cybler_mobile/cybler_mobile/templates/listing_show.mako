@@ -22,13 +22,11 @@ $(document).ready(function(){
 ${listing["createdOn"]}
 <hr/>
 % if listing["images"]:
-<a href="/listing/images/${listing["_id"]}">
-  <div class="camera_wrap">
+<div class="camera_wrap">
   %for image in listing["images"]:
     <div data-src="${image}"></div>
   %endfor
-  </div>
-</a>
+</div>
 %endif
 
 <p>${listing["description"]}</p>
