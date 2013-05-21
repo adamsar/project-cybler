@@ -10,12 +10,8 @@
 
     <!-- jQuery and jQuery Mobile -->
     <script src="/static/js/jquery-1.8.3.min.js"></script>
-    <script src="/static/js/jquery.mobile-1.3.1.min.js"></script>
-  
-  <script type="text/javascript">
-  <%block name="head_js"/>
-  </script>
-  
+    <script src="/static/js/jquery.mobile-1.3.1.min.js"></script>  
+    <%block name="head_js"/>
 </head>
   
 <body>

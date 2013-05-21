@@ -15,7 +15,7 @@ jQuery(".camera-wrap").camera()
 </%block>
 
 <%block name="content">
-<a rel="external" href="${listing["url"]}"><h2>${listing["title"]</h2></a>
+<a rel="external" href="${listing["url"]}"><h2>${listing["title"]}</h2></a>
 ${listing["createdOn"]}
 <hr/>
 % if listing["images"]:

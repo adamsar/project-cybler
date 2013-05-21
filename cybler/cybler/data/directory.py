@@ -44,7 +44,9 @@ def get_listings(db, all_fields=False, rows=10, start=0, **query):
         lat, lon = query['lat'], query['lon']
         q = {
             "loc": {
-                "$near": [lat, lon]
+                "$geoWithin": {
+                    "$center": [ [lat, lon], .5]
+                }
             }
         }
         q.update(query)
