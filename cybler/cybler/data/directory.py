@@ -48,10 +48,19 @@ def get_listings(db, all_fields=False, rows=10, start=0, **query):
             }
         }
         q.update(query)
+        if "city" in q:
+            del q["city"]
+        if "lat" in q:
+            del q["lat"]
+        if "lon" in q:
+            del q["lon"]
+        log.debug("Query (%s)" % str(q))
         results = db[COLLECTION].find(q, fields=fields).sort(sort)
     elif query:        
+        log.debug("Query (%s)" % str(query))
         results = db[COLLECTION].find(query, fields=fields).sort(sort)
     else:
+        log.debug("No query")
         results = db[COLLECTION].find(fields=fields).sort(sort)
     listings = [l for l in results[start:start+rows]]
     for listing in listings:

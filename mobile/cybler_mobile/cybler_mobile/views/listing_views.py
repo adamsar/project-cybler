@@ -7,7 +7,7 @@ from pyramid.url import route_url
 from pyramid.view import view_config
 from cybler_mobile.lib.cybler_api import CyblerAPI
 from cybler_mobile.lib import text
-
+import pyramid.httpexceptions as exc
 
 @view_config(route_name="listings", renderer="listings.mako")
 def listings(request):
@@ -24,3 +24,17 @@ def listings(request):
         "listings": listings
         }
 
+@view_config(route_name="listing", renderer="listing.mako")
+def listing(request):
+    """
+    Single listing full view page
+    """
+    listing_id = request.matchdict.get("listing_id")
+    if not listing_id:
+        exc.HTTPNotFound()
+    listing = request.api.get("listing", listing_id=listing_id)
+    if not listing:
+        exc.HTTPNotFound()
+    return {
+        "listing": listing
+        }
