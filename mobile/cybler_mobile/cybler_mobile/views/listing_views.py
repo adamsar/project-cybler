@@ -32,7 +32,7 @@ def listing(request):
     listing_id = request.matchdict.get("listing_id")
     if not listing_id:
         exc.HTTPNotFound()
-    listing = request.api.get("listing", listing_id=listing_id)
+    listing = request.api.get("listing", _id=listing_id)
     if not listing:
         exc.HTTPNotFound()
     return {
