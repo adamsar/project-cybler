@@ -53,3 +53,4 @@ def ingest_naughtyreview():
     for entry in entries:
         url, state, city = entry.split(",")
         feed_scraper.process_naughtyreview.delay(url, city, state)        
+

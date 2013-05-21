@@ -18,6 +18,11 @@ def location(request):
     """
     Displays a list of cities to choose from
     """
+    cities = request.api.get("city")
+
+    #Format the city name a little bit
+    for city in cities:
+        city['name'] = city['name'].title()
     return {
-        "cities": request.api.get("city")
+        "cities": cities
     }
