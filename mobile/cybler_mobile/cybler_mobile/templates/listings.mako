@@ -6,7 +6,7 @@
   <ul class="listings" data-role="listview" data-theme="d">
   % for listing in listings:
     <li>
-      <a href="/listing/${listing['_id']}'">
+      <a href="/listing/${listing['_id']}">
         % if listing.get('images'):
             <img src="${listing['images'][0]}" />
         % else:

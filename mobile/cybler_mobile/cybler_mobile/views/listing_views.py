@@ -30,7 +30,6 @@ def listing(request):
     Single listing full view page
     """
     listing_id = request.matchdict.get("listing_id")
-    print listing_id
     if not listing_id:
         exc.HTTPNotFound()
     listing = request.api.get("listing", _id=listing_id)
