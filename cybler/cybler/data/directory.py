@@ -36,7 +36,6 @@ def get_listings(db, all_fields=False, rows=10, start=0, **query):
                                                 "description",
                                                 "url"]
     sort = [("createdOn", pymongo.DESCENDING)]
-    query = {}
     if "city" in query and (not "lat" in query or not "lon" in query):
         city_entry = globe.get_city(db, query["city"], query.get("state"))
         lat, lon = (city_entry['loc']['lat'], city_entry['loc']['lon'])
@@ -44,9 +43,7 @@ def get_listings(db, all_fields=False, rows=10, start=0, **query):
         lat, lon = query['lat'], query['lon']
         q = {
             "loc": {
-                "$geoWithin": {
-                    "$center": [ [lat, lon], .5]
-                }
+                "$near": [lat, lon]
             }
         }
         q.update(query)

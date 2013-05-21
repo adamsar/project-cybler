@@ -6,7 +6,7 @@ single link to a slideshow gallery (can go back)
 <%block name="head_js">
 <script type="text/javascript" src="/static/js/camera.min.js"></script>
 <script type="text/javascript">
-jQuery(".camera-wrap").camera()
+  jQuery(".camera_wrap").camera();
 </script>
 </%block>
 

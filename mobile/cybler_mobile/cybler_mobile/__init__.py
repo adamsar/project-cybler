@@ -12,6 +12,7 @@ def main(global_config, **settings):
     config.add_static_view('static', 'cybler_mobile:static')
     config.add_static_view('js', 'cybler_mobile:static/js')
     config.add_static_view('img', 'cybler_mobile:static/img')
+    config.add_static_view('images', 'cybler_mobile:static/images')
     config.add_route('index', '/')
     config.add_route('location', '/location')
     config.add_route('listings', '/listing')
