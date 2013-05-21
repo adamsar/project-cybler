@@ -4,9 +4,12 @@ single link to a slideshow gallery (can go back)
 </%doc>
 <%inherit file="./head.mako" />
 <%block name="head_js">
+<link rel="stylesheet" href="/static/css/camera.css"/>
 <script type="text/javascript" src="/static/js/camera.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
   jQuery(".camera_wrap").camera();
+});
 </script>
 </%block>
 
