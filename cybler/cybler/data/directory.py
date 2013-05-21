@@ -23,35 +23,37 @@ def get_listing(db, listing_id):
     return listing
 
     
-def get_listings(db, all_fields=False, city=None,
-                 state=None,
-                 assumed_address=None,
-                 lat=None, lon=None, rows=10, start=0):
+def get_listings(db, all_fields=False, rows=10, start=0, **query):
     """Gets a bunch of listings based on criteria TBD"""
-    #TODO: Assumed address integration
-    fields = ["_id", "title", "description", "url", "images"] if not all_fields else ["_id",
-                                                                                      "title",
-                                                                                      "type",
-                                                                                      "images",
-                                                                                      "description",
-                                                                                      "url"]
+    fields = ["_id", 
+              "title", 
+              "description", 
+              "url", 
+              "images"] if not all_fields else ["_id",
+                                                "title",
+                                                "type",
+                                                "images",
+                                                "description",
+                                                "url"]
     sort = [("createdOn", pymongo.DESCENDING)]
     query = {}
-    if city and not lat and not lon:
-        city_entry = globe.get_city(db, city, state)
+    if "city" in query and (not "lat" in query or not "lon" in query):
+        city_entry = globe.get_city(db, query["city"], query.get("state"))
         lat, lon = (city_entry['loc']['lat'], city_entry['loc']['lon'])
-    if lat and lon:
-        #Search within about a 30 mile square of the specified lat and lon
-        query = {
+    elif "lat" in query and "lon" in query:
+        lat, lon = query['lat'], query['lon']
+        q = {
             "loc": {
                 "$near": [lat, lon]
-                }
             }
-        listings = [
-            l for l in db[COLLECTION].find(query, fields=fields).sort(sort)[start:start+rows]
-        ]
+        }
+        q.update(query)
+        results = db[COLLECTION].find(q, fields=fields).sort(sort)
+    elif query:        
+        results = db[COLLECTION].find(query, fields=fields).sort(sort)
     else:
-        listings = [l for l in db[COLLECTION].find(fields=fields).sort(sort)[start:start+rows]]
+        results = db[COLLECTION].find(fields=fields).sort(sort)
+    listings = [l for l in results[start:start+rows]]
     for listing in listings:
         listing["_id"] = str(listing["_id"])
         
