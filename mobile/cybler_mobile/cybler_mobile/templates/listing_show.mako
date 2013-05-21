@@ -6,11 +6,8 @@ single link to a slideshow gallery (can go back)
 <%block name="head_js">
 <link rel="stylesheet" href="/static/css/camera.css"/>
 <script type="text/javascript" src="/static/js/camera.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
-  jQuery(".camera_wrap").camera();
-});
-</script>
+<script type="text/javascript" src="/static/js/jquery.easing.1.3.js"></script>
+
 </%block>
 
 <%block name="header_title">
