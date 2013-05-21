@@ -2,7 +2,7 @@
 This is a single view for a listing. Contains a 
 single link to a slideshow gallery (can go back)
 </%doc>
-<%inherit file="./head.mako" /%>
+<%inherit file="./head.mako" />
 <%block name="head_js">
 <script type="text/javascript" src="/static/js/camera.min.js"></script>
 <script type="text/javascript">
