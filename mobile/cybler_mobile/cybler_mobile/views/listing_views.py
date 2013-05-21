@@ -24,12 +24,13 @@ def listings(request):
         "listings": listings
         }
 
-@view_config(route_name="listing", renderer="listing.mako")
+@view_config(route_name="listing", renderer="listing_show.mako")
 def listing(request):
     """
     Single listing full view page
     """
     listing_id = request.matchdict.get("listing_id")
+    print listing_id
     if not listing_id:
         exc.HTTPNotFound()
     listing = request.api.get("listing", _id=listing_id)
