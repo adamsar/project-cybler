@@ -259,7 +259,8 @@ def build_naughtyreviews(listing):
     listing.update({
             "description": body,
             "phone_number": phone_number,
-            "email": email
+            "email": email,
+            "images": ",".join(images)
             })
     #Push it out to the API
     return CyblerAPI().insert("listing", listing)
