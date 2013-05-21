@@ -5,6 +5,9 @@ single link to a slideshow gallery (can go back)
 <%inherit file="./head.mako" /%>
 <%block name="head_js">
 <script type="text/javascript" src="/static/js/camera.min.js"></script>
+<script type="text/javascript">
+jQuery(".camera-wrap").camera()
+</script>
 </%block>
 
 <%block name="header_title">
@@ -26,5 +29,4 @@ ${listing["createdOn"]}
 %endif
 
 <p>${listing["description"]</p>
-
 </%block>
