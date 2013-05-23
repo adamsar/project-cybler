@@ -171,7 +171,7 @@ def cities_query(db, start=0, rows=5, **query):
     return the closest cities
     """
     q = {}
-    sort = [("name", pymongo.ASCENDING)]
+    sort = [("city", pymongo.ASCENDING)]
     if "lat" in query and "lon" in query:
         q["loc"] = {
             "$near": [float(query["lat"]), float(query["lon"])]
