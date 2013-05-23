@@ -17,6 +17,7 @@ def main(global_config, **settings):
     config.add_route('location', '/location')
     config.add_route('listings', '/listing')
     config.add_route('listing', '/listing/{listing_id}')
+    config.add_route('about', '/about')
     
     # MongoDB
     def add_mongo_db(event):

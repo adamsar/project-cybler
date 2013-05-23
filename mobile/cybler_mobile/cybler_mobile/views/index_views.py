@@ -29,3 +29,11 @@ def location(request):
     return {
         "cities": cities
     }
+
+@view_config(route_name="about", renderer="about.mako")
+def about(request):
+    """
+    Basic page detailing random links
+    """
+    
+    return {}
