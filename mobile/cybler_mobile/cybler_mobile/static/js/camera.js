@@ -1096,7 +1096,8 @@
 
         if(!$('.imgLoaded',slide).length){
             var imgUrl = allImg[slideI];
-            var imgLoaded = $("<img src='" + imgUrl +"?"+ new Date().getTime() + "' />");            
+            var imgLoaded = $("<img/");
+            imgLoaded[0].src = imgUrl +"?"+ new Date().getTime();
             imgLoaded.attr("class", "imgLoaded");
             imgLoaded.css("visibility", "hidden");
             slide.css('visibility','hidden');
@@ -1104,32 +1105,33 @@
             var wT, hT;
             if (!$(imgLoaded).get(0).complete || wT == '0' || hT == '0' || typeof wT === 'undefined' || wT === false || typeof hT === 'undefined' || hT === false) {
                 $('.camera_loader',wrap).delay(500).fadeIn(400);
-                imgLoaded.ready(function() {
+                imgLoaded[0].onload = function(){
                     wT = imgLoaded[0].naturalWidth;
                     hT = imgLoaded[0].naturalHeight;
                     $(imgLoaded).attr('data-alignment',allAlign[slideI]).attr('data-portrait',allPor[slideI]);
                     $(imgLoaded).attr('width',wT);
                     $(imgLoaded).attr('height',hT);
-                    target.find('.cameraSlide_'+slideI).hide().css('visibility','visible');
+                    $('.cameraSlide_'+slideI).hide().css('visibility','visible');
                     resizeImage();
                     nextSlide(slideI+1);
-                });
+                };
             }
         } else {
             if( allImg.length > (slideI+1) && !$('.imgLoaded',slideNext).length ){
                 var imgUrl2 = allImg[(slideI+1)];
-                var imgLoaded2 = $("<img src='" + imgUrl2 +"?"+ new Date().getTime() + "' />");
+                var imgLoaded2 = $("<img />");
+                imgLoaded2[0].src = imgUrl2 +"?"+ new Date();
                 imgLoaded2.attr("class", "imgLoaded");
                 imgLoaded2.css("visibility", "hidden");
                 slideNext.prepend(imgLoaded2);
-                imgLoaded2.ready(function() {
+                imgLoaded2[0].onload = function() {
                     wT = imgLoaded2[0].naturalWidth;
                     hT = imgLoaded2[0].naturalHeight;
                     $(imgLoaded2).attr('data-alignment',allAlign[slideI+1]).attr('data-portrait',allPor[slideI+1]);
                     $(imgLoaded2).attr('width',wT);
                     $(imgLoaded2).attr('height',hT);
                     resizeImage();
-                });
+                };
             }
             opts.onLoaded.call(this);
             if($('.camera_loader',wrap).is(':visible')){
