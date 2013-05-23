@@ -14,6 +14,7 @@ Deals directly with mongo
 }
 """
 import os.path
+import pymongo
 from cybler.lib import geolocation
 
 COLLECTION = "cities"
@@ -164,11 +165,22 @@ def insert_city(db, city, state):
     return db[COLLECTION].insert(submitable)
         
 
-def all_cities(db):
+def cities_query(db, start=0, rows=5, **query):
     """
-    Returns all data
+    Queries mongo for city. If only lat and lon are specified, it will
+    return the closest cities
     """
-    cities = [x for x in db[COLLECTION].find()]
-    for city in cities:
-        city['_id'] = str(city['_id'])
-    return cities
+    q = {}
+    sort = [("name", pymongo.ASCENDING)]
+    if "lat" in query and "lon" in query:
+        q["loc"] = {
+            "$near": [float(query["lat"]), float(query["lon"])]
+        }
+    if q:
+        results = db[COLLECTION].find()
+    else:
+        results =  db[COLLECTION].find(q)
+    results = [c for c in results.sort(sort)[int(start):int(start)+int(rows)]]
+    for city in results:
+        city["_id"] = str(city["_id"])
+    return results

@@ -7,6 +7,7 @@ from pyramid.url import route_url
 from pyramid.view import view_config
 from cybler_mobile.lib.cybler_api import CyblerAPI
 from cybler_mobile.lib import text
+import datetime
 import pyramid.httpexceptions as exc
 
 @view_config(route_name="listings", renderer="listings.mako")
@@ -18,11 +19,17 @@ def listings(request):
     if "lat" not in p or "lon" not in p:
         return HTTPFound(route_url("location"))
     listings = request.api.get("listing", params={"lat": p["lat"], "lon": p["lon"]})
+    location = request.api.get("city", params={
+        "lat": p["lat"],
+        "lon": p["lon"]
+    })
     for listing in listings:
         listing["description"] = text.smart_truncate(listing["description"])
     return {
+        "location": location,
         "listings": listings
         }
+
 
 @view_config(route_name="listing", renderer="listing_show.mako")
 def listing(request):
@@ -35,6 +42,13 @@ def listing(request):
     listing = request.api.get("listing", _id=listing_id)
     if not listing:
         exc.HTTPNotFound()
+
+    location = request.api.get("city", params={
+        "lat": listing["loc"]["lat"],
+        "lon": listing["loc"]["lon"]
+    })
+
     return {
+        "location": location,
         "listing": listing
         }

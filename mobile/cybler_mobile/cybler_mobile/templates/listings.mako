@@ -1,6 +1,6 @@
 <%inherit file="head.mako" />
   <%block name="header_title">
-    Your listings
+    ${location[0]["city"].title()}
   </%block>  
 <%block name="content">
   <ul class="listings" data-role="listview" data-theme="d">
@@ -14,6 +14,7 @@
         % endif
         <h2>${listing['title']}</h2>
         <p>${listing['description']}</p>
+        <p class="ui-li-aside"><strong>${listing["createdOn"]}</strong>PM</p>
       </a>
     </li>
   % endfor

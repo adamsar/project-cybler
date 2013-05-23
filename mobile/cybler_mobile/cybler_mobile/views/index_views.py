@@ -18,7 +18,10 @@ def location(request):
     """
     Displays a list of cities to choose from
     """
-    cities = request.api.get("city")
+    cities = request.api.get("city", params={
+        "start": 0,
+        "rows": 100
+    })
 
     #Format the city name a little bit
     for city in cities:

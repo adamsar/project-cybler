@@ -26,6 +26,7 @@ def get_listing(db, listing_id):
 def get_listings(db, all_fields=False, rows=10, start=0, **query):
     """Gets a bunch of listings based on criteria TBD"""
     fields = ["_id", 
+              "createdOn",
               "title", 
               "description", 
               "url", 
@@ -33,6 +34,7 @@ def get_listings(db, all_fields=False, rows=10, start=0, **query):
                                                 "title",
                                                 "type",
                                                 "images",
+                                                "createdOn",
                                                 "description",
                                                 "url"]
     sort = [("createdOn", pymongo.DESCENDING)]
