@@ -6,15 +6,7 @@ single link to a slideshow gallery (can go back)
 <%block name="head_js">
 <link rel="stylesheet" href="/static/css/camera.css"/>
 <script type="text/javascript" src="/static/js/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="/static/js/camera.min.js"></script>
-
-<script type="text/javascript">
-jQuery(function(){
-  jQuery(".camera_wrap").camera({});
-});
-</script>
-
-
+<script type="text/javascript" src="/static/js/camera.js"></script>
 </%block>
 
 <%block name="header_title">
@@ -26,7 +18,7 @@ jQuery(function(){
 ${listing["createdOn"]}
 <hr/>
 % if listing["images"]:
-<div class="camera_wrap">
+<div class="camera_wrap" id="preview">
   %for image in listing["images"]:
     <div data-src="${image}"></div>
   %endfor
@@ -34,4 +26,16 @@ ${listing["createdOn"]}
 %endif
 
 <p>${listing["description"]}</p>
+<script type="text/javascript">
+var interval = null;
+var check = function(){
+  if($(".cameraContents").length == 0){
+    jQuery("#preview").camera();
+  }else{
+    clearInterval(interval);
+  }  
+};
+
+interval = setInterval(check, 2000); //Check every 2 seconds
+</script>
 </%block>
