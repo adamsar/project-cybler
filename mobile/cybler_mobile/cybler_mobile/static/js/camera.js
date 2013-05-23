@@ -1096,7 +1096,7 @@
 
         if(!$('.imgLoaded',slide).length){
             var imgUrl = allImg[slideI];
-            var imgLoaded = $("<img/");
+            var imgLoaded = $("<img />");
             imgLoaded[0].src = imgUrl +"?"+ new Date().getTime();
             imgLoaded.attr("class", "imgLoaded");
             imgLoaded.css("visibility", "hidden");
