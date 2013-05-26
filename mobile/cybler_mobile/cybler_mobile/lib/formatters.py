@@ -9,7 +9,7 @@ def main_listings_json(listing):
     and a properly formatted date"""
     return {
         "id": listing["_id"],
-        "image": listing["images"][0] if listing["images"] and len(listing["images"]) else "/static/img/question.png",
+        "image": text.extract_image_link(listing["images"][0]) if listing["images"] and len(listing["images"]) else "/static/img/question.png",
         "description": text.smart_truncate(listing["description"]),
         "title": listing["title"],
         "createdOn": text.api_date_convert(listing["createdOn"], "%a, %b %d %I:%M%p")

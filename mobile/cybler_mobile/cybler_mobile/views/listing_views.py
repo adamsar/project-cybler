@@ -52,6 +52,7 @@ def listing_gallery(request):
     if not listing_id:
         exc.HTTPNotFound()
     listing = request.api.get("listing", listing_id)
+    listing["images"] = [text.extract_image_link(i) for i in listing["images"]]
     return {
         "listing": listing
     }
@@ -67,6 +68,7 @@ def listing(request):
     listing = request.api.get("listing", _id=listing_id)
     if not listing:
         exc.HTTPNotFound()
+    listing["images"] = [text.extract_image_link(i) for i in listing["images"]]
 
     location = request.api.get("city", params={
         "lat": listing["loc"]["lat"],

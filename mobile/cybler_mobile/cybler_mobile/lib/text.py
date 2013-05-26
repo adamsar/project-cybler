@@ -6,6 +6,13 @@ import datetime
 
 API_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
+def extract_image_link(image_link):
+    """
+    Strips out unnecessary characters in an image link until ingestion is fixed
+    """
+    return image_link.strip("'[]")
+
+
 def smart_truncate(content, length=100, suffix='...'):
     """Truncates a list of text by the length of characters and a trailing suffix suffix"""
     if len(content) <= length:
