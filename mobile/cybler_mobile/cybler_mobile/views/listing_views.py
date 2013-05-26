@@ -6,30 +6,55 @@ from pyramid.httpexceptions import HTTPFound
 from pyramid.url import route_url
 from pyramid.view import view_config
 from cybler_mobile.lib.cybler_api import CyblerAPI
-from cybler_mobile.lib import text
+from cybler_mobile.lib import validators, text, formatters
 import datetime
 import pyramid.httpexceptions as exc
 
 @view_config(route_name="listings", renderer="listings.mako")
+@validators.locational
 def listings(request):
     """
     Main page for displaying a large amount of listings
     """
     p = request.params
-    if "lat" not in p or "lon" not in p:
-        return HTTPFound(route_url("location"))
-    listings = request.api.get("listing", params={"lat": p["lat"], "lon": p["lon"]})
     location = request.api.get("city", params={
         "lat": p["lat"],
         "lon": p["lon"]
     })
-    for listing in listings:
-        listing["description"] = text.smart_truncate(listing["description"])
+    if len(location):
+        location = location[0] #Grab closest location
+
     return {
-        "location": location,
-        "listings": listings
+        "location": location
         }
 
+
+@view_config(route_name="listings.json", renderer="json")
+@validators.locational
+def listings_json(request):
+    """Generates json data for a listing based on query parameters"""
+    p = request.params
+    listings = request.api.get("listing", params={
+        "lat": p["lat"],
+        "lon": p["lon"],
+        "start": p.get("start", 0),
+        "rows": p.get("rows", 10)
+    })
+    
+    return [formatters.main_listings_json(listing) for listing in listings]
+
+@view_config(route_name="listing_gallery", renderer="listing_gallery.mako")
+def listing_gallery(request):
+    """
+    A photo gallery page for a request
+    """
+    listing_id = request.matchdict.get("listing_id")
+    if not listing_id:
+        exc.HTTPNotFound()
+    listing = request.api.get("listing", listing_id)
+    return {
+        "listing": listing
+    }
 
 @view_config(route_name="listing", renderer="listing_show.mako")
 def listing(request):

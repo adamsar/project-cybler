@@ -25,18 +25,8 @@ def get_listing(db, listing_id):
     
 def get_listings(db, all_fields=False, rows=10, start=0, **query):
     """Gets a bunch of listings based on criteria TBD"""
-    fields = ["_id", 
-              "createdOn",
-              "title", 
-              "description", 
-              "url", 
-              "images"] if not all_fields else ["_id",
-                                                "title",
-                                                "type",
-                                                "images",
-                                                "createdOn",
-                                                "description",
-                                                "url"]
+    fields = ["_id",  "createdOn", "title",  "description",  "url", "images"]
+    if all_fields: fields.append("type")
     sort = [("createdOn", pymongo.DESCENDING)]
     if "city" in query and (not "lat" in query or not "lon" in query):
         city_entry = globe.get_city(db, query["city"], query.get("state"))
@@ -63,6 +53,7 @@ def get_listings(db, all_fields=False, rows=10, start=0, **query):
     else:
         log.debug("No query")
         results = db[COLLECTION].find(fields=fields).sort(sort)
+
     listings = [l for l in results[start:start+rows]]
     for listing in listings:
         listing["_id"] = str(listing["_id"])

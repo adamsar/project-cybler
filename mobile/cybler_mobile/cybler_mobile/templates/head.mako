@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-  <html>
+  <html ng-app>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -13,8 +13,15 @@
     <!-- Jquery 1.8.3 is needed for the camera plugin -->
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>    
+    <script type="text/javascript" src="/static/js/angular.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="/static/js/camera.js"></script>
+    <script type="text/javascript" src="/static/js/cybler.js"></script>
+    <style>
+    .centered{
+      text-align: center;
+    }
+    </style>
 
     <%block name="head_js"/>
 </head>

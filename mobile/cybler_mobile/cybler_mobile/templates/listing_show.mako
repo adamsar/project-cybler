@@ -4,9 +4,7 @@ single link to a slideshow gallery (can go back)
 </%doc>
 <%inherit file="./head.mako" />
 <%block name="head_js">
-<link rel="stylesheet" href="/static/css/camera.css"/>
-<script type="text/javascript" src="/static/js/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="/static/js/camera.js"></script>
+
 </%block>
 
 <%block name="header_title">
@@ -31,10 +29,13 @@ var check = function(){
   if($(".cameraContents").length == 0){
     jQuery("#preview").camera();
   }else{
+    jQuery("#preview").on("tap", function(event){
+      window.location.href = "/listing/${listing["_id"]}/gallery";
+    });
     clearInterval(interval);
   }  
 };
 
-interval = setInterval(check, 2000); //Check every 2 seconds
+interval = setInterval(check, 1000); //Check every second
 </script>
 </%block>

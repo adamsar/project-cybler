@@ -33,7 +33,7 @@ def get(listing, request):
         if "rows" in query:
             query["rows"] = int(query["rows"])
         if "start" in query:
-            query["start"] = int(query["rows"])
+            query["start"] = int(query["start"])
         if "lat" in query:
             query["lat"] = float(query["lat"])
         if "lon" in query:
