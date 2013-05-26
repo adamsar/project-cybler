@@ -35,7 +35,9 @@ def get_listings(db, all_fields=False, rows=10, start=0, **query):
         lat, lon = query['lat'], query['lon']
         q = {
             "loc": {
-                "$near": [lat, lon]
+                "$within": {
+                    "$center": [[lat, lon], .5]
+                }
             }
         }
         q.update(query)
@@ -46,15 +48,15 @@ def get_listings(db, all_fields=False, rows=10, start=0, **query):
         if "lon" in q:
             del q["lon"]
         log.debug("Query (%s)" % str(q))
-        results = db[COLLECTION].find(q, fields=fields).sort(sort)
+        results = db[COLLECTION].find(q, fields=fields)
     elif query:        
         log.debug("Query (%s)" % str(query))
-        results = db[COLLECTION].find(query, fields=fields).sort(sort)
+        results = db[COLLECTION].find(query, fields=fields)
     else:
         log.debug("No query")
-        results = db[COLLECTION].find(fields=fields).sort(sort)
+        results = db[COLLECTION].find(fields=fields)
 
-    listings = [l for l in results[start:start+rows]]
+    listings = [l for l in results.limit(rows).skip(start)]
     for listing in listings:
         listing["_id"] = str(listing["_id"])
         

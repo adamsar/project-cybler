@@ -44,6 +44,7 @@ def strip_tags(string):
     """Removes all the tags (html/xml) from a string """
     return TAG_RE.sub('', string)
 
+
 def image_format(string):
     """Removes trailing muck on http string for images"""
     return string.strip("[]' ")
