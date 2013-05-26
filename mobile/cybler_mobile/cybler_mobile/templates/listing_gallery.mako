@@ -20,7 +20,7 @@ Gallery for ${listing["title"]}
 <%block name="content">
 <ul id="gallery">
 % for image in listing["images"]:
-  <li><a href="${image}"><img src="${image}"/></a></li>
+  <li><a rel="external" href="${image}"><img src="${image}"/></a></li>
 % endfor
 </ul>
 </%block>
