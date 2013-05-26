@@ -21,6 +21,9 @@
     .centered{
       text-align: center;
     }
+    .hidden{
+      display: none;
+    }
     </style>
 
     <%block name="head_js"/>

@@ -9,6 +9,7 @@ viewing all images for a listing
 <script type="text/javascript">
 $(document).ready(function(){
   var photoSwiped = $("#gallery a").photoSwipe({enableMouseWheel: false});
+  $("#gallery a:first-child").click(); //Start it immediately
 });
 </script>
 </%block>
@@ -18,7 +19,7 @@ Gallery for ${listing["title"]}
 </%block>
 
 <%block name="content">
-<ul id="gallery">
+<ul class="hidden" id="gallery">
 % for image in listing["images"]:
   <li><a rel="external" href="${image}"><img src="${image}"/></a></li>
 % endfor
