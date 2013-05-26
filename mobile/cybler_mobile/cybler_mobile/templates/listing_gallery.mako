@@ -4,8 +4,8 @@ viewing all images for a listing
 </%doc>
 <%inherit file="./head.mako"/>
 <%block name="head_js">
-<script type="text/javascript" src="/startic/js/klass-min.js"></script>
-<script type="text/javascript" src="/startic/js/code.photoswipe-3.0.5.min.js"></script>
+<script type="text/javascript" src="/static/js/klass-min.js"></script>
+<script type="text/javascript" src="/static/js/code.photoswipe-3.0.5.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
   var photoSwiped = $("#gallery a").photoSwipe({enableMouseWheel: false});
