@@ -9,7 +9,7 @@ viewing all images for a listing
 <script type="text/javascript">
 $(document).ready(function(){
   var photoSwiped = $("#gallery a").photoSwipe({enableMouseWheel: false});
-  $("#gallery a:first-child").click(); //Start it immediately
+  photoSwiped.show(0);
 });
 </script>
 </%block>
