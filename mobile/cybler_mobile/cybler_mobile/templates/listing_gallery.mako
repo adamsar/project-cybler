@@ -14,7 +14,7 @@ $(document).ready(function(){
 </%block>
 
 <%block name="header_title">
-Gallery for %{listing["title"]}
+Gallery for ${listing["title"]}
 </%block>
 
 <%block name="content">
