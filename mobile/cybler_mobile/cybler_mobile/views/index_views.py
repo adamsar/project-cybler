@@ -26,6 +26,7 @@ def location(request):
     #Format the city name a little bit
     for city in cities:
         city['city'] = city['city'].title()
+    sorted(city, key=lambda x: return x['name'])
     return {
         "cities": cities
     }
