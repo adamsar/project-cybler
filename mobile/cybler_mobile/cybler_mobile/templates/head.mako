@@ -14,6 +14,7 @@
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>    
     <script type="text/javascript" src="/static/js/angular.min.js"></script>
+    <script type="text/javascript" src="/static/js/angular.adapter.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="/static/js/camera.js"></script>
     <script type="text/javascript" src="/static/js/cybler.js"></script>
