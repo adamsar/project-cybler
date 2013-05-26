@@ -26,7 +26,7 @@ def build_listing_backpage(item):
         images = soup.find("ul", {"id": "viewAdPhotoLayout"})
         if images:
             images = images.find_all("li")
-            images = [i.find("img").attrs["src"] for i in images]
+            images = [text.image_format(i.find("img").attrs["src"]) for i in images]
         
         listing_body = soup.find("div", "postingBody")
         if listing_body:
@@ -57,7 +57,7 @@ def build_listing_backpage(item):
             
         #Massage any unicode data
         item['title'] = item['title']
-        item['description'] = item['description']
+        item['description'] = text.strip_tags(item['description'])
         return CyblerAPI().insert("listing", data=item)            
     
 
@@ -191,14 +191,14 @@ def build_listing_adultsearch(listing):
 
     try:
         images = soup.find("div", {"id": "gallery"}).find_all("img")
-        images = [i.attrs['src'] for i in images]
+        images = [text.image_format(i.attrs['src']) for i in images]
     except:
         images = None        
             
     if number:
         listing["phone_number"] = number
     if images:
-        listing["images"] = images
+        listing["images"] = ",".join(images)
     return CyblerAPI().insert("listing", data=listing)     
     
 @task
@@ -218,7 +218,7 @@ def process_adultsearch(rss_url, city, state):
             "lat": city_lat,
             "lon": city_lon,
             "title": item["title"],
-            "description": item["summary"],
+            "description": text.strip_tags(item["summary"]),
             "type": "adultsearch"
             }
         return data
@@ -257,7 +257,7 @@ def build_naughtyreviews(listing):
 
     #Combine it all together
     listing.update({
-            "description": body,
+            "description": text.strip_tags(body),
             "phone_number": phone_number,
             "email": email,
             "images": ",".join(images)

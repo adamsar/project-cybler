@@ -5,7 +5,7 @@ Tools for manipulating text and extracting information from text
 import re
 PHONE_NUMBER_REGEX = "(\d{3}).*(\d{3}).*(\d{4})"
 EMAILS_REGEX = "([a-zA-Z0-9]+@[a-zA-Z0-9]+\.(com|net|org))"
-
+TAG_RE = re.compile(r'<[^>]+>')
 def extract_email(txt):
     """
     Extract any email addresses that may be contained within the text
@@ -38,3 +38,12 @@ def format_contents(contents):
     if not contents:
         return None
     return "".join([str(x).encode("utf-8", "replace") for x in contents.contents])
+
+
+def strip_tags(string):
+    """Removes all the tags (html/xml) from a string """
+    return TAG_RE.sub('', text)
+
+def image_format(string):
+    """Removes trailing muck on http string for images"""
+    return string.strip("[]' ")
