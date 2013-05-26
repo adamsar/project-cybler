@@ -11,17 +11,17 @@ CELERY_IMPORTS = ("cybler_tasks.tasks.scraped_ingestion", "cybler_tasks.data.fee
 CELERYBEAT_SCHEDULE = {
     "ingest-backpage": {
         "task": "celery_tasks.tasks.scraped_ingestion.ingest_backpage",
-        "schedule": crontab(minutes="0,15,30,45"),
+        "schedule": crontab(minute="0,15,30,45"),
         "args": ()
         },
     "ingest-adultsearch": {
         "task": "celery_tasks.tasks.scraped_ingestion.ingest_adultsearch",
-        "schedule": crontab(minutes="0,15,30,45"),
+        "schedule": crontab(minute="0,15,30,45"),
         "args": ()
         },
     "ingest-naughtyreviews": {
         "task": "celery_tasks.tasks.scraped_ingestion.ingest_naughtyreviews",
-        "schedule": crontab(minutes="0,15,30,45"),
+        "schedule": crontab(minute="0,15,30,45"),
         "args": ()
         }        
     }
