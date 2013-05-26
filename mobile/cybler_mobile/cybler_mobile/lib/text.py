@@ -10,7 +10,7 @@ def extract_image_link(image_link):
     """
     Strips out unnecessary characters in an image link until ingestion is fixed
     """
-    return image_link.strip("'[]")
+    return image_link.strip("'[] ")
 
 
 def smart_truncate(content, length=100, suffix='...'):
