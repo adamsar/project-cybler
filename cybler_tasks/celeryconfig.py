@@ -1,5 +1,6 @@
 ## Broker settings.
 from cybler_tasks import setup_app
+from celery.schedules import crontab
 from datetime import timedelta
 setup_app("development.ini")
 
@@ -10,15 +11,18 @@ CELERY_IMPORTS = ("cybler_tasks.tasks.scraped_ingestion", "cybler_tasks.data.fee
 CELERYBEAT_SCHEDULE = {
     "ingest-backpage": {
         "task": "celery_tasks.tasks.scraped_ingestion.ingest_backpage",
-        "schedule": timedelta(seconds=60*30), #Every 30 minutes
+        "schedule": crontab(minutes="0,15,30,45"),
+        "args": ()
         },
     "ingest-adultsearch": {
         "task": "celery_tasks.tasks.scraped_ingestion.ingest_adultsearch",
-        "schedule": timedelta(seconds=60*30), #Every 30 minutes
+        "schedule": crontab(minutes="0,15,30,45"),
+        "args": ()
         },
     "ingest-naughtyreviews": {
         "task": "celery_tasks.tasks.scraped_ingestion.ingest_naughtyreviews",
-        "schedule": timedelta(seconds=60*30), #Every 30 minutes
+        "schedule": crontab(minutes="0,15,30,45"),
+        "args": ()
         }        
     }
 
