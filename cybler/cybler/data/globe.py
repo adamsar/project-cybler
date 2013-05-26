@@ -180,7 +180,7 @@ def cities_query(db, start=0, rows=5, **query):
         results = db[COLLECTION].find()
     else:
         results =  db[COLLECTION].find(q)
-    results = [c for c in results.skip(start).limit(rows)]
+    results = [c for c in results.skip(int(start)).limit(int(rows))]
     for city in results:
         city["_id"] = str(city["_id"])
     return results

@@ -56,7 +56,7 @@ def get_listings(db, all_fields=False, rows=10, start=0, **query):
         log.debug("No query")
         results = db[COLLECTION].find(fields=fields)
 
-    listings = [l for l in results.limit(rows).skip(start)]
+    listings = [l for l in results.limit(int(rows)).skip(int(start))]
     for listing in listings:
         listing["_id"] = str(listing["_id"])
         
