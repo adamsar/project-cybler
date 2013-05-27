@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/static/css/themes/cybler.min.css" />
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile.structure-1.3.1.min.css" />
     <link rel="stylesheet" href="/static/css/camera.css"/>
+    <link rel="stylesheet" href="/static/css/cybler.css"/>
     <!-- Jquery 1.8.3 is needed for the camera plugin -->
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>    
@@ -18,14 +19,6 @@
     <script type="text/javascript" src="/static/js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="/static/js/camera.js"></script>
     <script type="text/javascript" src="/static/js/cybler.js"></script>
-    <style>
-    .centered{
-      text-align: center;
-    }
-    .hidden{
-      display: none;
-    }
-    </style>
 
     <%block name="head_js"/>
 </head>

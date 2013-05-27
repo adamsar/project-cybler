@@ -8,11 +8,12 @@ single link to a slideshow gallery (can go back)
 </%block>
 
 <%block name="header_title">
-    ${location[0]["city"].title()}
+    ${location["city"].title()}
 </%block>
 
 <%block name="content">
 <a rel="external" href="${listing["url"]}"><h2>${listing["title"]}</h2></a>
+${listing["createdOn"]}
 <hr/>
 % if listing["images"]:
 <div class="camera_wrap" id="preview">

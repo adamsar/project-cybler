@@ -1,0 +1,11 @@
+/*Make long titles */
+.ui-header .ui-title, .ui-footer .ui-title{
+    margin: .6em 0 .8em;
+}
+
+.centered{
+    text-align: center;
+}
+.hidden{
+    display: none;
+}

@@ -43,6 +43,7 @@ def listings_json(request):
     
     return [formatters.main_listings_json(listing) for listing in listings]
 
+
 @view_config(route_name="listing_gallery", renderer="listing_gallery.mako")
 def listing_gallery(request):
     """
@@ -67,13 +68,13 @@ def listing(request):
     listing = request.api.get("listing", _id=listing_id)
     if not listing:
         exc.HTTPNotFound()
-
+    listing = formatters.full_listing(listing)
     location = request.api.get("city", params={
         "lat": listing["loc"]["lat"],
         "lon": listing["loc"]["lon"]
     })
 
     return {
-        "location": location,
+        "location": location[0],
         "listing": listing
         }

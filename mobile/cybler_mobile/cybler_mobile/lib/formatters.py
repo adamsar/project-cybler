@@ -3,6 +3,11 @@
 
 from cybler_mobile.lib import text
 
+def full_listing(listing):
+    """Full listing data for displaying on a single page"""
+    listing["createdOn"] = text.api_date_convert(listing["createdOn"], "%a, %b %d %I:%M%p")
+    return listing
+
 
 def main_listings_json(listing):
     """For use in a batch listings page. Contains a single image, a truncated description,
