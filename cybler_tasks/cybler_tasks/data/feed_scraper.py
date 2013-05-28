@@ -3,13 +3,12 @@ Feed parsing using feedparser and some url scraping
 """
 
 from celery import task
-from cybler_tasks.lib import geolocation, text, scraper
+from cybler_tasks.lib import geolocation, text
 from cybler_tasks.data.cybler_api import CyblerAPI
 
 from bs4 import BeautifulSoup
 
 import urllib
-import httplib2
 import feedparser
 import logging
 
@@ -23,10 +22,10 @@ def build_listing_backpage(item):
 
         #Lets start scraping, we need the posting body, location data, and image data
         soup = BeautifulSoup(urllib.urlopen(item['url']).read())
-        images = soup.find("ul", {"id": "viewAdPhotoLayout"})
-        if images:
-            images = images.find_all("li")
-            images = [text.image_format(i.find("img").attrs["src"]) for i in images]
+        image_container = soup.find("ul", {"id": "viewAdPhotoLayout"})
+        if image_container:
+            images = image_container.find_all("img")
+            images = [text.image_format(i.attrs["src"]) for i in images]
         
         listing_body = soup.find("div", "postingBody")
         if listing_body:
@@ -37,9 +36,8 @@ def build_listing_backpage(item):
         location_data = ""
         for container in checkable_containers:
             if "Location" in container.contents:
-                location_data = contain.contents.replace("Location:", "")
+                location_data = container.contents.replace("Location:", "")
 
-#        emails = text.extract_emails(item['summary'])
         phone_number = text.extract_phone_number(item['description'])
         if not phone_number:
             if listing_body:
@@ -174,9 +172,8 @@ def process_craigslist(rss_url, city, state):
     #And the main algorithm, build listings with feed items and combine them with scraped data
     #then persist to mongo
     new_listings = map(get_listing, new_listings)
-    listings = []
     for data in new_listings:
-        listing = build_listing_craigslist.delay(data)
+        build_listing_craigslist.delay(data)
 
         
 @task
@@ -295,7 +292,6 @@ def process_naughtyreview(rss_url, city, state):
     #And the main algorithm, build listings with feed items and combine them with scraped data
     #then persist to mongo
     new_listings = map(get_listing, new_listings)
-    listings = []
     for data in new_listings:
-        listing = build_naughtyreviews.delay(data)
+        build_naughtyreviews.delay(data)
     

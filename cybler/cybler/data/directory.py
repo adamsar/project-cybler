@@ -28,6 +28,18 @@ def get_listings(db, all_fields=False, rows=10, start=0, **query):
     fields = ["_id",  "createdOn", "title",  "description",  "url", "images"]
     if all_fields: fields.append("type")
     sort = [("createdOn", pymongo.DESCENDING)]
+    
+    #Quick check for whether the listing has or doesn't have listings
+    if "has_image" in query:
+        if query["has_image"] == "true":
+            query["images"] = {
+                "$and": {
+                    "$exists": True,
+                    "$not": []
+                    }
+                }
+        del query["has_image"]
+        
     if "city" in query and (not "lat" in query or not "lon" in query):
         city_entry = globe.get_city(db, query["city"], query.get("state"))
         lat, lon = (city_entry['loc']['lat'], city_entry['loc']['lon'])
@@ -49,14 +61,14 @@ def get_listings(db, all_fields=False, rows=10, start=0, **query):
             del q["lon"]
         log.debug("Query (%s)" % str(q))
         results = db[COLLECTION].find(q, fields=fields)
-    elif query:        
+    elif query:
         log.debug("Query (%s)" % str(query))
         results = db[COLLECTION].find(query, fields=fields)
     else:
         log.debug("No query")
         results = db[COLLECTION].find(fields=fields)
 
-    listings = [l for l in results.limit(int(rows)).skip(int(start))]
+    listings = [l for l in results.sort(sort).limit(int(rows)).skip(int(start))]
     for listing in listings:
         listing["_id"] = str(listing["_id"])
         
