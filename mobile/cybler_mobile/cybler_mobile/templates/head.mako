@@ -26,9 +26,11 @@
 <body>
   <div data-role="page" id="location" data-theme="c">
     <div data-role="header">
+      <%block name="left-head-buttons"/>
       <h1>
       <%block name="header_title"/>
       </h1>  
+      <%block name="right-head-buttons"/>
     </div>
     <div data-role="content">
      <%block name="content"/>  

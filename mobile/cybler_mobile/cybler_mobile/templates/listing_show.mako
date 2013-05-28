@@ -7,6 +7,13 @@ single link to a slideshow gallery (can go back)
 
 </%block>
 
+<%block name="left-head-buttons">
+<a href="/listings?lat=${location["loc"]["lat"]}&lon=${location["loc"]["lon"]}"
+   data-icon="arrow-l">
+  Back
+</a>
+</%block>
+
 <%block name="header_title">
     ${location["city"].title()}
 </%block>
