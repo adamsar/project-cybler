@@ -35,6 +35,21 @@
     <div data-role="content">
      <%block name="content"/>  
     </div>
+    <div data-role="footer">
+      <div data-role="navbar" data-iconpos="bottom">
+        <ul>
+            <li>
+              <a data-icon="grid" href="/location">
+
+              </a>
+            </li>
+            <li>
+              <a data-icon="info" href="/about">
+              </a>
+            </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </body>
   
