@@ -5,14 +5,14 @@
 
     var defaults = {
         alignment     : 'center', //topLeft, topCenter, topRight, centerLeft, center, centerRight, bottomLeft, bottomCenter, bottomRight
-        autoAdvance     : true, //true, false
-        mobileAutoAdvance : true, //true, false. Auto-advancing for mobile devices
+        autoAdvance     : false, //true, false
+        mobileAutoAdvance : false, //true, false. Auto-advancing for mobile devices
         barDirection    : 'leftToRight',  //'leftToRight', 'rightToLeft', 'topToBottom', 'bottomToTop'
         barPosition     : 'bottom', //'bottom', 'left', 'top', 'right'
         cols        : 6,
         easing        : 'easeInOutExpo',  //for the complete list http://jqueryui.com/demos/effect/easing.html
         mobileEasing    : '', //leave empty if you want to display the same easing on mobile devices and on desktop etc.
-        fx          : 'random', //'random','simpleFade', 'curtainTopLeft', 'curtainTopRight', 'curtainBottomLeft', 'curtainBottomRight', 'curtainSliceLeft', 'curtainSliceRight', 'blindCurtainTopLeft', 'blindCurtainTopRight', 'blindCurtainBottomLeft', 'blindCurtainBottomRight', 'blindCurtainSliceBottom', 'blindCurtainSliceTop', 'stampede', 'mosaic', 'mosaicReverse', 'mosaicRandom', 'mosaicSpiral', 'mosaicSpiralReverse', 'topLeftBottomRight', 'bottomRightTopLeft', 'bottomLeftTopRight', 'bottomLeftTopRight'
+        fx          : 'scrollRight,scrollLeft', //'random','simpleFade', 'curtainTopLeft', 'curtainTopRight', 'curtainBottomLeft', 'curtainBottomRight', 'curtainSliceLeft', 'curtainSliceRight', 'blindCurtainTopLeft', 'blindCurtainTopRight', 'blindCurtainBottomLeft', 'blindCurtainBottomRight', 'blindCurtainSliceBottom', 'blindCurtainSliceTop', 'stampede', 'mosaic', 'mosaicReverse', 'mosaicRandom', 'mosaicSpiral', 'mosaicSpiralReverse', 'topLeftBottomRight', 'bottomRightTopLeft', 'bottomLeftTopRight', 'bottomLeftTopRight'
         //you can also use more than one effect, just separate them with commas: 'simpleFade, scrollRight, scrollBottom'
         mobileFx      : '', //leave empty if you want to display the same effect on mobile devices and on desktop etc.
 
@@ -72,7 +72,7 @@
 
         time        : 7000, //milliseconds between the end of the sliding effect and the start of the nex one
 
-        transPeriod     : 1500, //lenght of the sliding effect in milliseconds
+        transPeriod     : 0, //lenght of the sliding effect in milliseconds
 
         ////////callbacks
 
