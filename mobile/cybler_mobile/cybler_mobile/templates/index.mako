@@ -11,18 +11,17 @@
       width: 80%;      
       }
       </style>
-  
-      <script src="/static/js/jquery-1.8.3.min.js"></script>
+      <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
       <script>
           jQuery(window).ready(function(){
             initiate_geolocation();
           });
           function initiate_geolocation() {
-              navigator.geolocation.getCurrentPosition(handle_geolocation_query,handle_errors);
+              navigator.geolocation.getCurrentPosition(handle_geolocation_query, handle_errors);
           }
           function handle_errors(error)
           {
-            window.location.href = "/location"
+            window.location.href = "/location";
           }
           function handle_geolocation_query(position){
             window.location.href = "/listing?lat=" + position.coords.latitude +

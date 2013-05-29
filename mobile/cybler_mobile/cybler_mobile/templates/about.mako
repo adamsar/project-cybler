@@ -9,13 +9,13 @@ Project Cybler
     <a href="/location">Find New Location</a>
   </li>
   <li>
-    <a href="/about_info">About</a>
+    <a href="/info/about">About</a>
   </li>
   <li>
-    <a href="/privacy">Privacy</a>
+    <a href="/info/privacy">Privacy</a>
   </li>
   <li>
-    <a href="/tos">Terms of Use</a>
+    <a href="/info/tos">Terms of Use</a>
   </li>
   <li>
     <a href="/advert">Advertise</a>

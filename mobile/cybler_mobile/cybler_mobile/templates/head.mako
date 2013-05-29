@@ -19,7 +19,6 @@
     <script type="text/javascript" src="/static/js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" src="/static/js/camera.js"></script>
     <script type="text/javascript" src="/static/js/cybler.js"></script>
-
     <%block name="head_js"/>
 </head>
   
@@ -39,7 +38,7 @@
       <div data-role="navbar" data-iconpos="bottom">
         <ul>
             <li>
-              <a data-icon="home" href="/">
+              <a rel="external" data-ajax="false" data-icon="home" href="/">
 
               </a>
             </li>

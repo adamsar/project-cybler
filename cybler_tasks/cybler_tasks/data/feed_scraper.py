@@ -27,8 +27,6 @@ def build_listing_backpage(item):
         if image_container:
             images = image_container.find_all("img")
             images = [text.image_format(i.attrs["src"]) for i in images]
-        if not images:
-            return #No images, no dice
         
         listing_body = soup.find("div", "postingBody")
         if listing_body:
@@ -193,7 +191,7 @@ def build_listing_adultsearch(listing):
         images = soup.find("div", {"id": "gallery"}).find_all("img")
         images = [text.image_format(i.attrs['src']) for i in images]
     except:
-        return #No images, no dice
+        images = []
     if number:
         listing["phone_number"] = number
     if images:

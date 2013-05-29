@@ -19,6 +19,9 @@ def main(global_config, **settings):
     config.add_route('listings.json', '/listings.json')
     config.add_route('about', '/about')
     config.add_route('listing_gallery', '/listing/{listing_id}/gallery')
+    config.add_route('info', '/info/about')
+    config.add_route('privacy', '/info/privacy')
+    config.add_route('tos', '/info/tos')
     
     # MongoDB
     def add_mongo_db(event):
