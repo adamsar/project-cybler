@@ -1,7 +1,6 @@
 ## Broker settings.
 from cybler_tasks import setup_app
 from celery.schedules import crontab
-from datetime import timedelta
 setup_app("development.ini")
 
 BROKER_URL = "mongodb://localhost:27017/cybler"
@@ -18,11 +17,6 @@ CELERYBEAT_SCHEDULE = {
         "task": "celery_tasks.tasks.scraped_ingestion.ingest_adultsearch",
         "schedule": crontab(minute="0,15,30,45"),
         "args": ()
-        },
-    "ingest-naughtyreviews": {
-        "task": "celery_tasks.tasks.scraped_ingestion.ingest_naughtyreviews",
-        "schedule": crontab(minute="0,15,30,45"),
-        "args": ()
-        }        
+        }
     }
 
