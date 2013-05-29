@@ -35,7 +35,7 @@ ${listing["createdOn"]}
 var interval = null;
 var check = function(){
   if($(".cameraContents").length == 0){
-    jQuery("#preview").camera();
+    jQuery("#preview").camera({playPause: false, time: 0, transPeriod: 0, pagination: false});
   }else{
     jQuery("#preview").on("tap", function(event){
       window.location.href = "/listing/${listing["_id"]}/gallery";

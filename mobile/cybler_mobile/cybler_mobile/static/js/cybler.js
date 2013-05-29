@@ -3,7 +3,7 @@
   urlParams = {};
 
   window.onpopstate = function() {
-    var decode, p, query, search, _results;
+    var decode, match, p, query, search, _results;
     p = /\+/g;
     search = /([^&=]+)=?([^&]*)/g;
     decode = function(s) {
@@ -11,7 +11,7 @@
     };
     query = window.location.search.substring(1);
     _results = [];
-    while (match === search.exec(query)) {
+    while (match = search.exec(query)) {
       _results.push(urlParams[decode(match[1])] = decode(match[2]));
     }
     return _results;

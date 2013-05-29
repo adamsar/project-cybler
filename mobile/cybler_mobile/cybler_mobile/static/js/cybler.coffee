@@ -8,7 +8,7 @@ window.onpopstate = ->
   decode = (s) ->
     return decodeURIComponent(s.replace(pl, " "))
   query = window.location.search.substring(1)
-  while match is search.exec query
+  while match = search.exec query
     urlParams[decode(match[1])] = decode(match[2])
   
 ListingController = ($scope, $http) ->
