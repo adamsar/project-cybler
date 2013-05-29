@@ -1,4 +1,4 @@
-http://kc.backpage.com/online/exports/Rss.xml?section=4381&category=4443,KS,Kansas City
+http://kc.backpage.com/online/exports/Rss.xml?section=4381&category=4443,MO,Kansas City
 http://birmingham.backpage.com/online/exports/Rss.xml?section=4381&category=4443,AL,Birmingham
 http://indianapolis.backpage.com/online/exports/Rss.xml?section=446263&category=446832,IN,Indianapolis
 http://oklahomacity.backpage.com/online/exports/Rss.xml?section=4381&category=4443,OK,Oklahoma City
@@ -18,3 +18,47 @@ http://milwaukee.backpage.com/online/exports/Rss.xml?section=4381&category=4443,
 http://seattle.backpage.com/online/exports/Rss.xml?section=4381&category=4443,WA,Seattle
 http://atlanta.backpage.com/online/exports/Rss.xml?section=4381&category=4443,GA,Atlanta
 http://chicago.backpage.com/online/exports/Rss.xml?section=4381&category=4443,IL,Chicago
+http://mobile.backpage.com/online/exports/Rss.xml?section=4381&category=4443,AL,Mobile
+http://littlerock.backpage.com/online/exports/Rss.xml?section=162964&category=162971,AR,Little Rock
+http://sandiego.backpage.com/online/exports/Rss.xml?section=4624398&category=4624737,CA,San Diego
+http://sf.backpage.com/online/exports/Rss.xml?section=4381&category=4443,CA,San Francisco
+http://hartford.backpage.com/online/exports/Rss.xml?section=4360485&category=4360629,CT,Hartford
+http://orlando.backpage.com/online/exports/Rss.xml?section=4381&category=4443,FL,Orlando
+http://honolulu.backpage.com/online/exports/Rss.xml?section=4381&category=4443,HI,Honolulu
+http://desmoines.backpage.com/online/exports/Rss.xml?section=4381&category=4443,IA,Des Moines
+http://neworleans.backpage.com/online/exports/Rss.xml?section=4381&category=4443,LA,New Orleans
+http://baltimore.backpage.com/online/exports/Rss.xml?section=86919&category=86921,MD,Baltimore
+http://detroit.backpage.com/online/exports/Rss.xml?section=4381&category=4443,MI,Detroit
+http://minneapolis.backpage.com/online/exports/Rss.xml?section=4381&category=4443,MN,Minneapolis
+http://jackson.backpage.com/online/exports/Rss.xml?section=4381&category=4443,MS,Jackson
+http://lasvegas.backpage.com/online/exports/Rss.xml?section=4381&category=4443,NV,Las Vegas
+http://albuquerque.backpage.com/online/exports/Rss.xml?section=4381&category=4443,NM,Albuquerque
+http://newyork.backpage.com/online/exports/Rss.xml?keyword=manhattan§ion=4381&category=4443,NY,New York
+http://charlotte.backpage.com/online/exports/Rss.xml?section=4381&category=4443,NC,Charlotte
+http://bismarck.backpage.com/online/exports/Rss.xml?section=517473&category=517483,ND,Bismarck
+http://cincinnati.backpage.com/online/exports/Rss.xml?section=4381&category=4443,OH,Cincinnati
+http://cleveland.backpage.com/online/exports/Rss.xml?section=4381&category=4443,OH,Cleveland
+http://philadelphia.backpage.com/online/exports/Rss.xml?section=4381&category=4443,PA,Philadelphia
+http://pittsburgh.backpage.com/online/exports/Rss.xml?section=4381&category=4443,PA,Pittsburgh
+http://charleston.backpage.com/online/exports/Rss.xml?section=4381&category=4443,SC,Charleston
+http://nashville.backpage.com/online/exports/Rss.xml?section=186356&category=186357,TN,Nashville
+http://houston.backpage.com/online/exports/Rss.xml?section=4381&category=4443,TX,Houston
+http://richmond.backpage.com/online/exports/Rss.xml?section=4381&category=4443,VA,Richmond
+http://fresno.backpage.com/online/exports/Rss.xml?section=4381&category=4443,CA,Fresno
+http://jacksonville.backpage.com/online/exports/Rss.xml?section=203287&category=203289,FL,Jacksonville
+http://memphis.backpage.com/online/exports/Rss.xml?section=186356&category=186357,TN,Memphis
+http://virginiabeach.backpage.com/online/exports/Rss.xml?section=4381&category=4443,VA,Virginia Beach
+http://sacramento.backpage.com/online/exports/Rss.xml?section=55846&category=55861,CA,Sacramento
+http://anchorage.backpage.com/online/exports/Rss.xml?section=4381&category=4443,AK,Anchorage
+http://delaware.backpage.com/online/exports/Rss.xml?section=4381&category=4443,DE,Wilmington
+http://boise.backpage.com/online/exports/Rss.xml?section=4381&category=4443,ID,Boise
+http://maine.backpage.com/online/exports/Rss.xml?section=4381&category=4443,ME,Portland
+http://montana.backpage.com/online/exports/Rss.xml?section=517473&category=517483,MT,Billings
+http://newhampshire.backpage.com/online/exports/Rss.xml?section=4381&category=4443,NH,Manchester
+http://centraljersey.backpage.com/online/exports/Rss.xml?section=4381&category=4443,NJ,Jersey City
+http://providence.backpage.com/online/exports/Rss.xml?section=4381&category=4443,RI,Providence
+http://siouxcity.backpage.com/online/exports/Rss.xml?section=4381&category=4443,SD,Sioux Falls
+http://saltlakecity.backpage.com/online/exports/Rss.xml?section=4381&category=4443,UT,Salt Lake City
+http://burlington.backpage.com/online/exports/Rss.xml?section=4381&category=4443,VT,Burlington
+http://huntington.backpage.com/online/exports/Rss.xml?section=517473&category=517483,WV,Huntington
+http://wyoming.backpage.com/online/exports/Rss.xml?section=517473&category=517483,WY,Cheyenne

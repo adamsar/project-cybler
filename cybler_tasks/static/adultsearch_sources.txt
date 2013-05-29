@@ -21,5 +21,45 @@ http://adultsearch.com/washington-dc/washington-dc/female-escorts/rss?type=1&loc
 http://adultsearch.com/pennsylvania/philadelphia/female-escorts/rss?type=1&loc_id=13491,PA,Philadelphia
 http://adultsearch.com/tennessee/memphis/female-escorts/rss?type=1&loc_id=13971,TN,Memphis
 http://ca.adultsearch.com/ontario/toronto/female-escorts/rss?type=1&loc_id=16059,ON,Toronto
-http://adultsearch.com/virginia/virginia-beach/female-escorts/rss?type=1&loc_id=15053,VA,VirginiaBeach
+http://adultsearch.com/virginia/virginia-beach/female-escorts/rss?type=1&loc_id=15053,VA,Virginia Beach
 http://adultsearch.com/oregon/portland/female-escorts/rss?type=1&loc_id=13276,OR,Portland
+http://adultsearch.com/alabama/birmingham/female-escorts/rss?type=1&loc_id=1496,AL,Birmingham
+http://adultsearch.com/alabama/mobile/female-escorts/rss?type=1&loc_id=1279,AL,Mobile
+http://adultsearch.com/arkansas/little-rock/female-escorts/rss?type=1&loc_id=2387,AR,Little Rock
+http://adultsearch.com/california/los-angeles/female-escorts/rss?type=1&loc_id=2580,CA,Los Angeles
+http://adultsearch.com/california/san-diego/female-escorts/rss?type=1&loc_id=2821,CA,San Diego
+http://adultsearch.com/california/san-francisco/female-escorts/rss?type=1&loc_id=2840,CA,San Francisco
+http://adultsearch.com/connecticut/hartford/female-escorts/rss?type=1&loc_id=3515,CA,Hartford
+http://adultsearch.com/florida/miami/female-escorts/rss?type=1&loc_id=3693,FL,Miami
+http://adultsearch.com/florida/orlando/female-escorts/rss?type=1&loc_id=3725,FL,Orlando
+http://adultsearch.com/indiana/indianapolis/female-escorts/rss?type=1&loc_id=5023,IN,Indianapolis
+http://adultsearch.com/iowa/des-moines/female-escorts/rss?type=1&loc_id=5318,IA,DesMoines
+http://adultsearch.com/kentucky/louisville/female-escorts/rss?type=1&loc_id=6901,KY,Louisville
+http://adultsearch.com/louisiana/new-orleans/female-escorts/rss?type=1&loc_id=7139,LA,New Orleans
+http://adultsearch.com/michigan/detroit/female-escorts/rss?type=1&loc_id=8253,MI,Detroit
+http://adultsearch.com/mississippi/jackson/female-escorts/rss?type=1&loc_id=9870,MS,Jackson
+http://adultsearch.com/missouri/kansas-city/female-escorts/rss?type=1&loc_id=10263,MO,Kansas City
+http://adultsearch.com/nevada/las-vegas/female-escorts/rss?type=1&loc_id=10991,NV,Las Vegas
+http://adultsearch.com/new-york/new-york-city/female-escorts/rss?type=1&loc_id=18308,NY,New York
+http://adultsearch.com/ohio/cincinnati/female-escorts/rss?type=1&loc_id=12476,OH,Cincinnati
+http://adultsearch.com/ohio/cleveland/female-escorts/rss?type=1&loc_id=12479,OH,Cleveland
+http://adultsearch.com/oklahoma/oklahoma-city/female-escorts/rss?type=1&loc_id=12807,OK,Oklahoma City
+http://adultsearch.com/pennsylvania/pittsburgh/female-escorts/rss?type=1&loc_id=13492,PA,Pittsburgh
+http://adultsearch.com/south-carolina/charleston/female-escorts/rss?type=1&loc_id=13532,SC,Charleston
+http://adultsearch.com/tennessee/nashville/female-escorts/rss?type=1&loc_id=13997,TN,Nashville
+http://adultsearch.com/texas/houston/female-escorts/rss?type=1&loc_id=14402,TX,Houston
+http://adultsearch.com/virginia/richmond/female-escorts/rss?type=1&loc_id=15048,VA,Richmond
+http://adultsearch.com/wisconsin/milwaukee/female-escorts/rss?type=1&loc_id=15465,WI,Milwaukee
+http://adultsearch.com/california/sacramento/female-escorts/rss?type=1&loc_id=2788,CA,Sacramento
+http://adultsearch.com/alaska/anchorage/female-escorts/rss?type=1&loc_id=2001,AK,Anchorage
+http://adultsearch.com/delaware/wilmington/female-escorts/rss?type=1&loc_id=3540,DE,Wilmington
+http://adultsearch.com/idaho/boise/female-escorts/rss?type=1&loc_id=4474,ID,Boise
+http://adultsearch.com/maine/portland/female-escorts/rss?type=1&loc_id=7310,ME,Portland
+http://adultsearch.com/montana/billings/female-escorts/rss?type=1&loc_id=10629,MT,Billings
+http://adultsearch.com/new-hampshire/manchester/female-escorts/rss?type=1&loc_id=11058,NH,Manchester
+http://adultsearch.com/new-jersey/jersey-city/female-escorts/rss?type=1&loc_id=11086,NJ,Jersey City
+http://adultsearch.com/rhode-island/providence/female-escorts/rss?type=1&loc_id=13515,RI,Providence
+http://adultsearch.com/south-dakota/sioux-falls/female-escorts/rss?type=1&loc_id=13728,SD,Sioux Falls
+http://adultsearch.com/utah/salt-lake-city/female-escorts/rss?type=1&loc_id=14949,UT,Salt Lake City
+http://adultsearch.com/vermont/burlington/female-escorts/rss?type=1&loc_id=15010,VT,Burlington
+http://adultsearch.com/wyoming/cheyenne/female-escorts/rss?type=1&loc_id=15555,WY,Cheyenne
