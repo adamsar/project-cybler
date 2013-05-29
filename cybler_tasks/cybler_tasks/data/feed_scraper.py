@@ -23,9 +23,12 @@ def build_listing_backpage(item):
         #Lets start scraping, we need the posting body, location data, and image data
         soup = BeautifulSoup(urllib.urlopen(item['url']).read())
         image_container = soup.find("ul", {"id": "viewAdPhotoLayout"})
+        images = []
         if image_container:
             images = image_container.find_all("img")
             images = [text.image_format(i.attrs["src"]) for i in images]
+        if not images:
+            return #No images, no dice
         
         listing_body = soup.find("div", "postingBody")
         if listing_body:
@@ -190,8 +193,7 @@ def build_listing_adultsearch(listing):
         images = soup.find("div", {"id": "gallery"}).find_all("img")
         images = [text.image_format(i.attrs['src']) for i in images]
     except:
-        images = None        
-            
+        return #No images, no dice
     if number:
         listing["phone_number"] = number
     if images:
