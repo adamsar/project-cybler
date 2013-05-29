@@ -8,7 +8,7 @@ viewing all images for a listing
 <script type="text/javascript" src="/static/js/code.photoswipe-3.0.5.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-  var photoSwiped = $("#gallery a").photoSwipe({enableMouseWheel: false});
+  var photoSwiped = $("#gallery a").photoSwipe({enableMouseWheel: false, zIndex: 0});
   photoSwiped.show(0);
 });
 </script>
