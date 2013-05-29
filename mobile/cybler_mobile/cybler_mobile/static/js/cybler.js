@@ -1,31 +1,14 @@
-  var ListingController, getUrlVars, urlParams;
-
-  getUrlVars = function() {
-    var hash, hashes, vars, _i, _len;
-    vars = [];
-    hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for (_i = 0, _len = hashes.length; _i < _len; _i++) {
-      hash = hashes[_i];
-      hash = hash.split("=");
-      vars[hash[0]] = hash[1];
-    }
-    return vars;
-  };
-
-  urlParams = getUrlVars();
+  var ListingController;
 
   ListingController = function($scope, $http) {
     $scope.start = 0;
     $scope.rows = 10;
     $scope.listings = [];
     $scope.getMore = function() {
-      var baseUrl, key, value;
+      var baseUrl;
       baseUrl = "/listings.json?start=" + $scope.start + "&rows=" + $scope.rows;
-      for (key in urlParams) {
-        value = urlParams[key];
-        if (key === "lat" || key === "lon" || key === "has_images" || key === "type") {
-          baseUrl += "&" + key + "=" + value;
-        }
+      if ($scope.queryParams) {
+        baseUrl += "&" + queryParams;
       }
       return $http.get(baseUrl).success(function(data) {
         var entry, _i, _len;
@@ -33,8 +16,9 @@
           entry = data[_i];
           $scope.listings.push(entry);
         }
-        return $scope.start += $scope.rows;
+        $scope.start += $scope.rows;
       });
     };
     return $scope.getMore();
   };
+

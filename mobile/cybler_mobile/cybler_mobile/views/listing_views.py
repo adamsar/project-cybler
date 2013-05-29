@@ -6,6 +6,7 @@ from pyramid.view import view_config
 from cybler_mobile.lib import validators, formatters
 
 import pyramid.httpexceptions as exc
+import urllib
 
 @view_config(route_name="listings", renderer="listings.mako")
 @validators.locational
@@ -18,11 +19,14 @@ def listings(request):
         "lat": p["lat"],
         "lon": p["lon"]
     })
+    
+    params = dict((k, v) for k, v in p.iteritems())
     if len(location):
         location = location[0] #Grab closest location
-
+    
     return {
-        "location": location
+        "location": location,
+        "queryParams": urllib.urlencode(params) if params else None
         }
 
 
