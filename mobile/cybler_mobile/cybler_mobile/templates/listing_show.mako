@@ -7,8 +7,8 @@ single link to a slideshow gallery (can go back)
 
 </%block>
 
-<%block name="left-head-buttons">
-<a href="/listings?lat=${location["loc"]["lat"]}&lon=${location["loc"]["lon"]}"
+<%block name="left_head_buttons">
+<a href="/listing?lat=${location["loc"]["lat"]}&lon=${location["loc"]["lon"]}"
    data-icon="arrow-l">
   Back
 </a>
