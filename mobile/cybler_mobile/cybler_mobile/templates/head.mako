@@ -39,6 +39,11 @@
       <div data-role="navbar" data-iconpos="bottom">
         <ul>
             <li>
+              <a data-icon="home" href="/">
+
+              </a>
+            </li>
+            <li>
               <a data-icon="grid" href="/location">
 
               </a>
