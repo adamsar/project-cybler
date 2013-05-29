@@ -35,7 +35,7 @@
     <div data-role="content">
      <%block name="content"/>  
     </div>
-    <div data-role="footer">
+    <div data-role="footer" data-id="foot" data-position="fixed">
       <div data-role="navbar" data-iconpos="bottom">
         <ul>
             <li>
