@@ -23,7 +23,9 @@
       baseUrl = "/listings.json?start=" + $scope.start + "&rows=" + $scope.rows;
       for (key in urlParams) {
         value = urlParams[key];
-        baseUrl += "&" + key + "=" + value;
+        if (key === "lat" || key === "lon" || key === "has_images" || key === "type") {
+          baseUrl += "&" + key + "=" + value;
+        }
       }
       return $http.get(baseUrl).success(function(data) {
         var entry, _i, _len;
@@ -31,7 +33,7 @@
           entry = data[_i];
           $scope.listings.push(entry);
         }
-        $scope.start += $scope.rows;
+        return $scope.start += $scope.rows;
       });
     };
     return $scope.getMore();

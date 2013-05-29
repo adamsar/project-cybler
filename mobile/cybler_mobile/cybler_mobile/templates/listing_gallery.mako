@@ -14,8 +14,15 @@ $(document).ready(function(){
 </script>
 </%block>
 
+<%block name="left_head_buttons">
+<a href="/listing/${listing['_id']}"
+   data-icon="arrow-l">
+  Back
+</a>
+</%block>
+
 <%block name="header_title">
-Gallery for ${listing["title"]}
+Gallery
 </%block>
 
 <%block name="content">
