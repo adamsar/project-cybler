@@ -7,7 +7,6 @@ getUrlVars = ->
   hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&')
   for hash in hashes
     hash = hash.split "="
-    vars.push(hash[0])
     vars[hash[0]] = hash[1]
   return vars
 urlParams = getUrlVars()
@@ -20,8 +19,7 @@ ListingController = ($scope, $http) ->
   $scope.getMore = ->
     baseUrl = "/listings.json?start=#{$scope.start}&rows=#{$scope.rows}"
     for key, value of urlParams
-      if key != '0' and key != 0
-        baseUrl += "&#{key}=#{value}"
+      baseUrl += "&#{key}=#{value}"
     $http.get(baseUrl).success (data) ->
       for entry in data
         $scope.listings.push(entry)

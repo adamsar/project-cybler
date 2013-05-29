@@ -7,7 +7,6 @@
     for (_i = 0, _len = hashes.length; _i < _len; _i++) {
       hash = hashes[_i];
       hash = hash.split("=");
-      vars.push(hash[0]);
       vars[hash[0]] = hash[1];
     }
     return vars;
@@ -24,9 +23,7 @@
       baseUrl = "/listings.json?start=" + $scope.start + "&rows=" + $scope.rows;
       for (key in urlParams) {
         value = urlParams[key];
-        if (key !== '0' && key !== 0) {
-          baseUrl += "&" + key + "=" + value;
-        }
+        baseUrl += "&" + key + "=" + value;
       }
       return $http.get(baseUrl).success(function(data) {
         var entry, _i, _len;
@@ -34,7 +31,7 @@
           entry = data[_i];
           $scope.listings.push(entry);
         }
-        return $scope.start += $scope.rows;
+        $scope.start += $scope.rows;
       });
     };
     return $scope.getMore();
