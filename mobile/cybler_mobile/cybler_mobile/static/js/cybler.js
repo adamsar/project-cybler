@@ -1,21 +1,19 @@
-  var ListingController, urlParams;
+  var ListingController, getUrlVars, urlParams;
 
-  urlParams = {};
-
-  window.onpopstate = function() {
-    var decode, match, p, query, search, _results;
-    p = /\+/g;
-    search = /([^&=]+)=?([^&]*)/g;
-    decode = function(s) {
-      return decodeURIComponent(s.replace(pl, " "));
-    };
-    query = window.location.search.substring(1);
-    _results = [];
-    while (match = search.exec(query)) {
-      _results.push(urlParams[decode(match[1])] = decode(match[2]));
+  getUrlVars = function() {
+    var hash, hashes, vars, _i, _len;
+    vars = [];
+    hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (_i = 0, _len = hashes.length; _i < _len; _i++) {
+      hash = hashes[_i];
+      hash = hash.split("=");
+      vars.push(hash[0]);
+      vars[hash[0]] = hash[1];
     }
-    return _results;
+    return vars;
   };
+
+  urlParams = getUrlVars();
 
   ListingController = function($scope, $http) {
     $scope.start = 0;

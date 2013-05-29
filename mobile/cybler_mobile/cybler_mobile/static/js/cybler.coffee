@@ -1,15 +1,16 @@
 #Controller used for managing the listings list on /listings.mako
 #
 # Get Url parameters for use in the app
-urlParams = {}
-window.onpopstate = ->
-  p = /\+/g
-  search = /([^&=]+)=?([^&]*)/g
-  decode = (s) ->
-    return decodeURIComponent(s.replace(pl, " "))
-  query = window.location.search.substring(1)
-  while match = search.exec query
-    urlParams[decode(match[1])] = decode(match[2])
+
+getUrlVars = ->
+  vars = []
+  hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&')
+  for hash in hashes
+    hash = hash.split "="
+    vars.push(hash[0])
+    vars[hash[0]] = hash[1]
+  return vars
+urlParams = getUrlVars()
   
 ListingController = ($scope, $http) ->
   $scope.start = 0
