@@ -4,7 +4,7 @@
 </%block>
 
 <%block name="content">
-<div ng-init='queryParams = "${queryParams}"' >
+<div ng-init="queryParams = '${queryParams}'" >
   <ul ng-controller="ListingController" 
     class="listings" 
     data-role="listview" 

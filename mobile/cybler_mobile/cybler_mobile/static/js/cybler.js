@@ -8,7 +8,7 @@
       var baseUrl;
       baseUrl = "/listings.json?start=" + $scope.start + "&rows=" + $scope.rows;
       if ($scope.queryParams) {
-        baseUrl += "&" + queryParams;
+        baseUrl += "&" + $scope.queryParams;
       }
       return $http.get(baseUrl).success(function(data) {
         var entry, _i, _len;

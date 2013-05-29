@@ -8,7 +8,7 @@ ListingController = ($scope, $http) ->
   $scope.getMore = ->
     baseUrl = "/listings.json?start=#{$scope.start}&rows=#{$scope.rows}"
     if $scope.queryParams
-      baseUrl += "&#{queryParams}"
+      baseUrl += "&#{$scope.queryParams}"
     $http.get(baseUrl).success (data) ->
       for entry in data
         $scope.listings.push(entry)
