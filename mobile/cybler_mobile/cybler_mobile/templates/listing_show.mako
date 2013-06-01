@@ -15,7 +15,7 @@ single link to a slideshow gallery (can go back)
 </%block>
 
 <%block name="header_title">
-    ${location["city"].title()}
+    ${location["contact"]["city"].title()}
 </%block>
 
 <%block name="content">
