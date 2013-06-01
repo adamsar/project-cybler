@@ -30,7 +30,7 @@ http://www.myproviderguide.com/rss/hartford/free-posts/w4m,CA,Hartford
 http://www.myproviderguide.com/rss/miami/free-posts/w4m,FL,Miami
 http://www.myproviderguide.com/rss/orlando/free-posts/w4m,FL,Orlando
 http://www.myproviderguide.com/rss/indianapolis/free-posts/w4m,IN,Indianapolis
-http://www.myproviderguide.com/rss/des-moines/free-posts/w4m,IA,DesMoines
+http://www.myproviderguide.com/rss/des-moines/free-posts/w4m,IA,Des Moines
 http://www.myproviderguide.com/rss/louisville/free-posts/w4m,KY,Louisville
 http://www.myproviderguide.com/rss/new-orleans/free-posts/w4m,LA,NewOrleans
 http://www.myproviderguide.com/rss/detroit/free-posts/w4m,MI,Detroit
