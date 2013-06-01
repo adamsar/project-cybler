@@ -30,7 +30,7 @@ ${listing["created_on"]}
 </div>
 %endif
 
-<p>${listing["description"]}</p>
+<p>${listing["description"].replace("\n", "")}</p>
 <script type="text/javascript">
 var interval = null;
 var check = function(){
