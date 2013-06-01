@@ -48,7 +48,7 @@ class ListingDirectory(CyblerResourceHandler):
                 "$ne": None
                 }
         sort = [("created_on", pymongo.DESCENDING)]
-        return self.query(start=start, rows=rows, sort=sort,**q)
+        return self.query(start=start, rows=rows, sort=sort, **q)
         
 
     def insert(self, resource):

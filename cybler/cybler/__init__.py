@@ -25,6 +25,7 @@ def main(global_config, **settings):
         db[globe.Globe.__collection__].ensure_index([("loc", pymongo.GEO2D)])
         db[directory.ListingDirectory.__collection__].ensure_index([("loc", pymongo.GEO2D)])
         event.request.db = db
+        
     db_uri = settings['mongodb.url']
     MongoDB = pymongo.Connection
     if 'pyramid_debugtoolbar' in set(settings.values()):

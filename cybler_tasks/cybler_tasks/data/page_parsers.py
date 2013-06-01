@@ -63,7 +63,7 @@ class BackPageParser(CyblerParser):
         listing_body = self.soup.find("div", "postingBody")
         if listing_body:
             listing_body = text.body_format(listing_body)
-            if len(listing_body):
+            if listing_body:
                 self.listing["description"] = listing_body
 
         #Next, look for images

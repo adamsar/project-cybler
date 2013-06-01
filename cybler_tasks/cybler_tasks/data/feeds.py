@@ -26,11 +26,11 @@ def process_feed(rss_url, city, state, Parser):
     for listing in listings:
         massaged = {
             "id": text.url_to_id(listing["id"]),
-            "url": item["link"],
+            "url": listing["link"],
             "city": city,
             "state": state,
-            "title": item["title"],
-            "description": text.strip_tags(item.get("summary", "")),
+            "title": listing["title"],
+            "description": text.strip_tags(listing.get("summary", "")),
             "type": Parser.__type__
         }
         ingest_element.delay(massaged, Parser)
