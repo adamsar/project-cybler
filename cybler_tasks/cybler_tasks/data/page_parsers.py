@@ -102,7 +102,7 @@ class ProviderGuideParser(CyblerParser):
     def _parse_soup(self):
         """Massage HTML from provider guide"""
         #Get full text from the article
-        body = text.strip_tags(
+        body = text.body_format(
             "".join(
             self.soup.find(
                 "div", {
