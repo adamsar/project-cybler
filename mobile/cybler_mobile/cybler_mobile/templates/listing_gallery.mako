@@ -12,10 +12,10 @@ $(document).ready(function(){
   photoSwiped.show(0);
 });
 </script>
-</%block>
+</%block>C
 
 <%block name="left_head_buttons">
-<a href="/listing/${listing['_id']}"
+<a href="/listing/${listing["_id"]}"
    data-icon="arrow-l">
   Back
 </a>
