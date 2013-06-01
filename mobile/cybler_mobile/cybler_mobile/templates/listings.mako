@@ -11,7 +11,7 @@
     data-theme="d">
 
   <li ng-repeat="listing in listings">
-    <a href="/listing/{{listing.id}}">      
+    <a href="/listing/{{listing.id}}">
       <img ng-src="{{listing.image}}" />
       <h2>{{listing.title}}</h2>
       <p>{{listing.description}}</p>

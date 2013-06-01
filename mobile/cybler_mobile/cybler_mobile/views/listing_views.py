@@ -15,14 +15,16 @@ def listings(request):
     Main page for displaying a large amount of listings
     """
     p = request.params
-    location = request.api.get("city", params={
+    location = request.api.get("location", params={
         "lat": p["lat"],
-        "lon": p["lon"]
+        "lon": p["lon"],
+        "rows": 1,
+        "start": 0
     })
     
     params = dict((k, v) for k, v in p.iteritems())
-    if len(location):
-        location = location[0] #Grab closest location
+    if location and  len(location["results"]):
+        location = location["results"][0] #Grab closest location
     
     return {
         "location": location,
@@ -40,7 +42,7 @@ def listings_json(request):
     params["rows"] = int(params.get("rows", 10))
     listings = request.api.get("listing", params=params)
     
-    return [formatters.main_listings_json(listing) for listing in listings]
+    return [formatters.main_listings_json(listing) for listing in listings["results"]]
 
 
 @view_config(route_name="listing_gallery", renderer="listing_gallery.mako")
@@ -68,12 +70,7 @@ def listing(request):
     if not listing:
         exc.HTTPNotFound()
     listing = formatters.full_listing(listing)
-    location = request.api.get("city", params={
-        "lat": listing["loc"]["lat"],
-        "lon": listing["loc"]["lon"]
-    })
 
     return {
-        "location": location[0],
         "listing": listing
         }

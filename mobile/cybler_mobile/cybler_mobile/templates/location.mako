@@ -7,10 +7,10 @@
   
   <%block name="content">
     <ul data-role="listview">
-      % for location in cities:
+      % for location in locations:
       <li>
-      <a href="/listing?lat=${location['loc']['lat']}&lon=${location['loc']['lon']}">
-        ${location['city']}
+      <a href="/listing?city=${location.city}">
+        ${location['city'].title()}
       </a>
       </li>
       % endfor

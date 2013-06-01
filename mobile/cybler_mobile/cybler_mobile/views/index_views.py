@@ -3,7 +3,6 @@ Index views that don't have any information to display whatsoever
 """
 
 from pyramid.view import view_config
-from cybler_mobile.lib.cybler_api import CyblerAPI
 
 @view_config(route_name="index", renderer="index.mako")
 def splash_page(request):
@@ -18,17 +17,14 @@ def location(request):
     """
     Displays a list of cities to choose from
     """
-    cities = request.api.get("city", params={
+    locations = request.api.get("location", params={
         "start": 0,
-        "rows": 100
+        "rows": 0
     })
 
-    #Format the city name a little bit
-    for city in cities:
-        city['city'] = city['city'].title()
-    cities = sorted(cities, key=lambda x: x['city'])
+    locations = sorted(locations["results"], key=lambda x: x['city'])
     return {
-        "cities": cities
+        "locations": locations
     }
 
 @view_config(route_name="about", renderer="about.mako")
