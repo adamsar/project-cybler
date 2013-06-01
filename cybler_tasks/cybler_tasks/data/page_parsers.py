@@ -120,9 +120,9 @@ class ProviderGuideParser(CyblerParser):
             image_links = [link.attrs['href'] for link in img_link_container.find_all("a")]
             for i in image_links:
                 if "myproviderguide.com" not in i:
-                    images.push("http://www.myproviderguide.com" + i)
+                    images.append("http://www.myproviderguide.com" + i)
                 else:
-                    images.push(i)
+                    images.append(i)
         self.listing.update({
             "description": body,
             "images": ",".join(images)
