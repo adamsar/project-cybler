@@ -64,4 +64,4 @@ def body_format(soup_bits):
             result += "%s\n" % candidate_str
             
     #If the string was modified, then we'll close the paragraph tag and return it
-    return ""
+    return result
