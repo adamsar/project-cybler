@@ -4,6 +4,7 @@ Code dealing with the parsing of a page of data
 from bs4 import BeautifulSoup
 from cybler_tasks.data.cybler_api import CyblerAPI
 from cybler_tasks.lib import text
+import urllib
 
 ASSOCIATED_RESOURCE = "listing"
 class BaseParser(object):
@@ -17,7 +18,7 @@ class BaseParser(object):
         Constructor requires a listing massaged in from the an rssfeed
         """
         self.listing = listing
-        self.soup = BeautifulSoup(self.listing['url'])
+        self.soup = BeautifulSoup(urllib.urlopen(self.listing['url']).read())
         self.api = CyblerAPI()
 
     @property
