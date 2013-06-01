@@ -103,11 +103,12 @@ class ProviderGuideParser(CyblerParser):
         """Massage HTML from provider guide"""
         #Get full text from the article
         body = text.strip_tags(
+            "".join(
             self.soup.find(
                 "div", {
                     "id": "post_bodytext"
                 }
-            )
+            ).contents)
         )
 
         #Now do images
