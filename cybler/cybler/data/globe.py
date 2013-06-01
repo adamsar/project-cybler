@@ -162,7 +162,7 @@ class Globe(CyblerResourceHandler):
         country = components[len(components) - 1]["long_name"].lower()
         
         return {
-            "city": city,
+            "city": params.get("city").lower(),
             "state": state,
             "country": country,
             "loc": {
