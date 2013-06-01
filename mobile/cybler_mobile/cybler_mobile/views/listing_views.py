@@ -15,12 +15,13 @@ def listings(request):
     Main page for displaying a large amount of listings
     """
     p = request.params
-    location = request.api.get("location", params={
-        "lat": p["lat"],
-        "lon": p["lon"],
+    params = dict((k, v) for k, v in p.iteritems())    
+    q = {
         "rows": 1,
         "start": 0
-    })
+        }
+    q.update(params)
+    location = request.api.get("location", params=q)
     
     params = dict((k, v) for k, v in p.iteritems())
     if location and  len(location["results"]):
