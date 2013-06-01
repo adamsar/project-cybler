@@ -45,6 +45,6 @@ def ingest_providerguide():
     for entry in entries:
         try:
             url, state, city = entry.split(",")
-            feeds.process_feed.delay(url, city, state, page_parsers.AdultSearchParser)
+            feeds.process_feed.delay(url, city, state, page_parsers.ProviderGuideParser)
         except:
             print "Error with one of the feeds"
