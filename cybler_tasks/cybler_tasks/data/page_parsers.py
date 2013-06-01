@@ -86,11 +86,14 @@ class AdultSearchParser(CyblerParser):
         """Massage the html from an adultsearch listing"""
 
         #Grab any images associated with the post
-        try:
-            image_containers = self.soup.find("div", {"id": "gallery"}).find_all("img")
-            images = [text.image_format(i.attrs['src'] for i in image_containers)]
-        except:
-            images = []
+        image = self.soup.find("div", {"id": "gallery"})
+        images = []
+        if image:
+            images = image.find_all("img")
+            if images:
+                images = [i.attrs['src'] for i in images]
+            else:
+                images = []
 
         self.listing["images"] = ",".join(images)
 
