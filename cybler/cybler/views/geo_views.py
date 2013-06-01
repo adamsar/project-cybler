@@ -3,20 +3,19 @@ Views pertaining to geo information
 """
 
 from pyramid.view import view_config
-from cybler.data import globe
-from cybler.lib import http_statuses
 import cybler.resources
+from cybler.lib import formatters
 import logging
 log = logging.getLogger(__name__)
 
-@view_config(context=cybler.resources.City, request_method='GET', renderer="json")
-def get(city, request):
+@view_config(context=cybler.resources.Location, request_method='GET', renderer="json")
+def get(location, request):
     """
-    Handler for cities queries
+    Handler for location queries
     """
-    request.response.status = http_statuses.OK
-    p = request.params
-    params = dict((k, v) for k, v in p.iteritems())
-    cities = [c for c in globe.cities_query(request.db, **params)]
-    log.debug("Returning (%s) cities" % str(cities))
-    return cities
+    if location.data:
+        return formatters.full_location_json(location.data)
+    else:
+        return formatters.locations_list_json(
+            request.handler.query_from_params(request.params)
+        )

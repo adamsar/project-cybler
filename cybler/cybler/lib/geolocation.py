@@ -14,10 +14,9 @@ log = logging.getLogger(__name__)
 #info with this (like lat and lon)
 GOOGLE_MAPS_GEOCODE = "http://maps.google.com/maps/api/geocode/json"
 
-def decode_to_latlon(address):
+def get_entry(address):
     """
-    Takes a string address and attempts to decode it to some meaningful geolocational
-    data
+    Returns the raw results for a look up based on an address
     """
     h = Http()
     url_params = {
@@ -30,10 +29,21 @@ def decode_to_latlon(address):
     response, content = h.request(url)
     log.debug("Got back: Response(%s) and Content(%s)" % (str(response), str(content)))
     result = json.loads(content)
-    if 'status' not in result or result['status'] != 'OK':
+    if "status" not in result or result["status"] != "OK":
+        return
+    return result
+    
+
+def decode_to_latlon(address):
+    """
+    Takes a string address and attempts to decode it to some meaningful geolocational
+    data
+    """
+    entry = get_entry(address)
+    if not entry:
         return None, None
-    else:
-        return result['results'][0]['geometry']['location']['lat'], result['results'][0]['geometry']['location']['lng']
+    else:        
+        return entry['results'][0]['geometry']['location']['lat'], entry['results'][0]['geometry']['location']['lng']
 
 
 def get_best_guess_address(country=None, city=None, state=None, address=None, zipcode=None):

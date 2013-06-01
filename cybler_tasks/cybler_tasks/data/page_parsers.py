@@ -1,0 +1,128 @@
+"""
+Code dealing with the parsing of a page of data
+"""
+from bs4 import BeautifulSoup
+from cybler_tasks.data.cybler_api import CyblerAPI
+from cybler_tasks.lib import text
+
+ASSOCIATED_RESOURCE = "listing"
+class BaseParser(object):
+    """
+    The basic parser that will be inherited by all. Provides an ingestion
+    interface
+    """
+    
+    def __init__(self, listing):
+        """
+        Constructor requires a listing massaged in from the an rssfeed
+        """
+        self.listing = listing
+        self.soup = BeautifulSoup(self.listing['url'])
+        self.api = CyblerAPI()
+
+    @property
+    def valid(self):
+        raise NotImplementedError()
+
+    def _parse_soup(self):
+        raise NotImplementedError()
+        
+    def ingest(self):
+        """
+        The actual ingestion code
+        """
+        #Use the soup to modify the listing
+        self._parse_soup()
+        #Check if the listing is valid and update via the API
+        if self.valid:
+            self.api.insert(ASSOCIATED_RESOURCE, self.listing)
+
+class CyblerParser(BaseParser):
+    """Parser used for generic cybler ingestion"""
+
+    @property
+    def valid(self):
+        """
+        Checks if a listing is valid for sending to the Cybler API
+        """
+        return self.listing.get("description") and self.listing.get("title")
+
+        
+class BackPageParser(CyblerParser):
+    """
+    Parser for a backpage listing
+    """
+
+    __type__ = "backpage"
+    
+    def _parse_soup(self):
+        """
+        Grab out the appropriate elements in the soup
+        """
+        #First get the full listings body
+        listing_body = self.soup.find("div", "postingBody")
+        if listing_body:
+            listing_body = text.body_format(listing_body)
+            if len(listing_body):
+                self.listing["description"] = listing_body
+
+        #Next, look for images
+        image_container = self.soup.find("ul", {"id": "viewAdPhotoLayout"})
+        if image_container:
+            images = [text.image_format(i.attrs["src"]) for i in image_container.find_all("img")]
+            self.listing["images"] = ",".join(images)
+        else:
+            self.listing["images"] = []
+
+class AdultSearchParser(CyblerParser):
+    """
+    Parser for all adultsearch.com listings
+    """
+
+    __type__ = "adultsearch"
+
+    def _parse_soup(self):
+        """Massage the html from an adultsearch listing"""
+
+        #Grab any images associated with the post
+        try:
+            image_containers = self.soup.find("div", {"id": "gallery"}).find_all("img")
+            images = [text.image_format(i.attrs['src'] for i in image_containers)]
+        except:
+            images = []
+
+        self.listing["images"] = ",".join(images)
+
+class ProviderGuideParser(CyblerParser):
+    """Parser for providerguide.com"""
+
+    __type__ = "providerguide"
+
+    def _parser_soup(self):
+        """Massage HTML from provider guide"""
+        #Get full text from the article
+        body = text.strip_tags(
+            self.soup.find(
+                "div", {
+                    "id": "post_bodytext"
+                }
+            )
+        )
+
+        #Now do images
+        images = []
+        img_link_container = self.soup.find(
+            "div", {
+                "id": "post_photos"
+            })
+        if img_link_container:
+            image_links = [link.attrs['href'] for link in img_link_container.find_all("a")]
+            for i in image_links:
+                if "myproviderguide.com" not in i:
+                    images.push("http://www.myproviderguide.com" + i)
+                else:
+                    images.push(i)
+        self.listing.update({
+            "description": body,
+            "images": ",".join(images)
+            })

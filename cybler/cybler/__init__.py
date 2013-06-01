@@ -22,8 +22,8 @@ def main(global_config, **settings):
         db = settings['mongodb_conn'][db_name]
         #Make sure we can make geo queries
         from cybler.data import globe, directory
-        db[globe.COLLECTION].ensure_index([("loc", pymongo.GEO2D)])
-        db[directory.COLLECTION].ensure_index([("loc", pymongo.GEO2D)])
+        db[globe.Globe.__collection__].ensure_index([("loc", pymongo.GEO2D)])
+        db[directory.ListingDirectory.__collection__].ensure_index([("loc", pymongo.GEO2D)])
         event.request.db = db
     db_uri = settings['mongodb.url']
     MongoDB = pymongo.Connection

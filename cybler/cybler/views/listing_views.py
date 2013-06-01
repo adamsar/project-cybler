@@ -2,71 +2,40 @@
 return json"""
 
 from pyramid.view import view_config
-import pyramid.httpexceptions as exc
 
 from cybler.data import directory
 from cybler.lib import geolocation
 from cybler.lib import http_statuses
+from cybler.lib import request_validators
+from cybler.lib import formatters
+
 
 from bson.objectid import ObjectId
 
 import cybler.resources
-import datetime
 import logging
 log = logging.getLogger(__name__)
 
 #RESOURCE - GET:/listing/
 @view_config(context=cybler.resources.Listing, request_method='GET', renderer="json")
+@request_validators.rest_handler(return_status=http_statuses.OK)
 def get(listing, request):
     """
     Get handler for resources. If there is a resource specified, the context,
     the listing will contain data. If not, get all listings based on query string
     params
     """
-    request.response.status = http_statuses.OK
     if listing.data is None:
-        #Extract query from params
-        p = request.params
-        query = dict((k, v) for k, v in p.iteritems())
-
-        #Now process specific params
-        if "rows" in query:
-            query["rows"] = int(query["rows"])
-        if "start" in query:
-            query["start"] = int(query["start"])
-        if "lat" in query:
-            query["lat"] = float(query["lat"])
-        if "lon" in query:
-            query["lon"] = float(query["lon"])
-        return directory.get_listings(listing.request.db, **query)
-    return listing.data
-
+        return formatters.listings_json(
+            request.handler.query_from_params(request.params)
+            )
+    return formatters.full_listing_json(listing.data)
     
-#RESOURCE - GET:/listing/debug_list
-@view_config(context=cybler.resources.Listing,
-             request_method='GET',
-             name="debug_list",
-             renderer="debug_list.mako")
-def debug_list(listing, request):
-    """
-    Displays a pretty-printed html list for debugging listings
-    """
-    params = request.params
-    rows = params.get("rows")
-    start = params.get("start")
-    city = params.get("city")
-    query = {
-        "city": city
-    }
-    if rows:
-        query["rows"] = int(rows)
-    if start:
-        query["start"] = int(start)
-    return {"listings": directory.get_listings(listing.request.db, all_fields=True, **query)}
 
-    
 #RESOURCE: POST:/listing/
 @view_config(context=cybler.resources.Listing, request_method='POST', renderer="json")
+@request_validators.rest_handler(formatter=formatters.full_listing_json,
+                                 return_status=http_statuses.CREATED)
 def post(listing, request):
     """    
     Make a new listing with POST data.
@@ -89,78 +58,8 @@ def post(listing, request):
       image
       type
     """
-    
-    params = request.params
-    #Quick validation, will update late
-    if "city" not in params or \
-       "title" not in params:
-        raise exc.HTTPBadRequest()
-
-    #Extract required parameters
-    city = params["city"]
-    place_name = params.get("place_name")
-    email = params.get("email")        
-    phone_number = params.get("phone_number")
-    if phone_number:
-        try:
-            phone_number = int(phone_number)
-        except:
-            phone_number = None
-            
-    title = params["title"]
-
-    #Extract optional parameters
-    _id = params.get("id")
-    _type = params.get("type")
-    url = params.get("url")
-    country = params.get("country")
-    state = params.get("state")    
-    address = params.get("address")
-    lat = params.get("lat")
-    if lat:
-        try:
-            lat = float(lat)
-        except:
-            lat = None
-            
-    lon = params.get("lon")
-    if lon:
-        try:
-            lon = float(lon)
-        except:
-            lon = None
-
-    zipcode = params.get("zip")        
-    images = params.get("images")
-    description = params.get("description")
-
-    #Add ContactInformation into mongo
-    contact_info = {
-        "name": place_name,
-        "address": address,
-        "email": email,
-        "phone_number": phone_number
-    }
-    
-    #Add into MongoDB
-    listing_data = {
-        "type": _type,
-        "url": url,
-        "createdOn": datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'),
-        "title": title,
-        "description": description,
-        "images": images.split(",") if images else None,
-        "contact": contact_info
-    }
-    if _id:
-        listing_data["_id"] = str(_id)
-
-    listing_id = directory.add_listing(request.db, listing_data, city=city, state=state)
-    log.debug("New listing add with id: (%s)" % str(listing_id))
-    request.response.status = http_statuses.CREATED
-    
-    #And return    
-    return directory.get_listing(listing.request.db, listing_id)
+    resource = request_validators.listing_from_params(request.params)
+    return request.handler.insert(resource)
 
     
 #Resource DELETE: /listing/{id}
@@ -171,7 +70,7 @@ def delete(listing, request):
         directory.remove_listing(listing.request.db, listing.data['_id'])
         request.response.status = http_statuses.NO_CONTENT
 
-        
+
 #Resource PUT: /listing/{id}
 @view_config(context=cybler.resources.Listing, request_method='PUT', renderer="json")
 def put(listing, request):
