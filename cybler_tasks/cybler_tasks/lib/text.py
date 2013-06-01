@@ -57,13 +57,11 @@ def body_format(soup_bits):
     Removes tags from HTML, and joins them with nicely formatted paragraph tags
     if there is content
     """
-    result = "<p>"
+    result = ""
     for content in soup_bits.contents:
         candidate_str = strip_tags(unicode(content)).strip()
         if len(candidate_str):
-            result += "%s</p><p>" % candidate_str
+            result += "%s\n" % candidate_str
             
     #If the string was modified, then we'll close the paragraph tag and return it
-    if len(result) > 3:
-        return result + "</p>"
     return ""
