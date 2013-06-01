@@ -20,7 +20,7 @@ single link to a slideshow gallery (can go back)
 
 <%block name="content">
 <a rel="external" href="${listing["url"]}"><h2>${listing["title"]}</h2></a>
-${listing["createdOn"]}
+${listing["created_on"]}
 <hr/>
 % if listing["images"]:
 <div class="camera_wrap" id="preview">

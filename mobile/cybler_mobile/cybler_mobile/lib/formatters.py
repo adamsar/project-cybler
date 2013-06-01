@@ -5,7 +5,7 @@ from cybler_mobile.lib import text
 
 def full_listing(listing):
     """Full listing data for displaying on a single page"""
-    listing["createdOn"] = text.api_date_convert(listing["createdOn"], "%a, %b %d %I:%M%p")
+    listing["created_on"] = text.api_date_convert(listing["created_on"], "%a, %b %d %I:%M%p")
     return listing
 
 
@@ -17,5 +17,5 @@ def main_listings_json(listing):
         "image": text.extract_image_link(listing["images"][0]) if listing["images"] and len(listing["images"]) else "/static/img/question.png",
         "description": text.smart_truncate(listing["description"]),
         "title": listing["title"],
-        "createdOn": text.api_date_convert(listing["createdOn"], "%a, %b %d %I:%M%p")
+        "created_on": text.api_date_convert(listing["created_on"], "%a, %b %d %I:%M%p")
     }

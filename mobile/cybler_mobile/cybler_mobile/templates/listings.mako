@@ -15,11 +15,6 @@
       <img ng-src="{{listing.image}}" />
       <h2>{{listing.title}}</h2>
       <p>{{listing.description}}</p>
-      <p class="ui-li-aside">
-        <strong>
-            {{listing.createdOn}}
-        </strong>
-      </p>
     </a>
   </li>
 

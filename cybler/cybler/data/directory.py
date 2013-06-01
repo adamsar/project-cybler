@@ -40,9 +40,7 @@ class ListingDirectory(CyblerResourceHandler):
                 }
             }
         if "city" in params:
-            q["contact"] = {
-                "city": params["city"].lower()
-                }
+            q["contact.city"] = params["city"].lower()
         if "type" in params:
             q["type"] = params["type"]
         if "images" in params and params["images"] == "true":
