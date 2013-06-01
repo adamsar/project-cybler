@@ -31,6 +31,13 @@ def listing_from_params(params):
         "images": params["images"].split(",") if params.get("images") else None
     }
 
+    if resource["contact"]["city"]:
+        resource["contact"]["city"] = resource["contact"]["city"].lower()
+    if resource["contact"]["state"]:
+        resource["contact"]["state"] = resource["contact"]["state"].lower()
+    if resource["contact"]["country"]:
+        resource["contact"]["country"] = resource["contact"]["country"].lower()
+
     if not resource["_id"]:
         del resource["_id"]
 

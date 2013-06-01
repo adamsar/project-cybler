@@ -43,6 +43,7 @@ class MongoResource(object):
     def __init__(self, request, _id=None):        
         self.request = request
         self.request.handler = self.__handler__(request.db)
+        self.data = None
         if _id:
             try:
                 self.data = self.request.handler.get(_id)
