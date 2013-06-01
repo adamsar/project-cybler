@@ -4,11 +4,9 @@ from pyramid.httpexceptions import HTTPFound
 import pyramid.httpexceptions as exc
 
 #this line defines our root view
-@view_config(context=cybler.resources.Root)
-#this line also attaches /home to our root view
-@view_config(context=cybler.resources.Root, name='home')
+@view_config(context=cybler.resources.Root, renderer="string")
 def my_view(request):
-    return "Test"
+    return {}
     
 
 #this handles our 404 not found view

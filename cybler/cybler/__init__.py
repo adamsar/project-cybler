@@ -9,9 +9,9 @@ def main(global_config, **settings):
     """ This function returns a WSGI application.
     """
     config = Configurator(settings=settings, root_factory=Root)
-#    config.add_view('cybler.views.my_view',
-#                    context='cybler:resources.Root',
-#                    renderer='cybler:templates/mytemplate.pt')
+    # config.add_view('cybler.blankviews.my_view',
+    #                 context='cybler:resources.Root',
+    #                 renderer='cybler:templates/blank.pt')
     config.add_static_view('static', 'cybler:static')
     
     # MongoDB
