@@ -160,6 +160,7 @@ class Globe(CyblerResourceHandler):
                 if "administrative_area_level_1" in comp:
                     state = comp["short_name"].lower()
         country = components[len(components) - 1]["long_name"].lower()
+        
         return {
             "city": city,
             "state": state,

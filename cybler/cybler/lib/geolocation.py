@@ -21,7 +21,7 @@ def get_entry(address):
     h = Http()
     url_params = {
         'address': address,
-        'sensor': 'false',
+        'sensor': 'false'
     }    
 
     url = "%s?%s" % (GOOGLE_MAPS_GEOCODE, urlencode(url_params))

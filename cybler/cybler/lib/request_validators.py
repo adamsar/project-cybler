@@ -32,7 +32,7 @@ def listing_from_params(params):
     }
 
     if resource["contact"]["city"]:
-        resource["contact"]["city"] = resource["contact"]["city"].lower()
+        resource["contact"]["city"] = resource["contact"]["city"].lower().replace(".", "")
     if resource["contact"]["state"]:
         resource["contact"]["state"] = resource["contact"]["state"].lower()
     if resource["contact"]["country"]:
