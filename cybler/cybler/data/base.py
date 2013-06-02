@@ -39,8 +39,8 @@ class CyblerResourceHandler(object):
         return listing
 
         
-    def query(self, start=0, rows=10, fields=[], sort=None, no_nulls=False,
-              **query):
+    def query(self, start=0, rows=10, fields=[], distinct_field=None,
+              sort=None, no_nulls=False, **query):
         """
         Basic query functionality. no_nulls specifies whether to remove possible
         nulls from the query or not
@@ -53,16 +53,21 @@ class CyblerResourceHandler(object):
         log.debug("Making query for %s: params: (%s), start: %s, rows: %s, fields: %s" %
                   (self.__resource__, str(query), start, rows, fields))
         results = []
-        if fields:
-            results = self.store.find(query, fields=fields)
+        
+
+        if distinct_field:
+            results = self.store.distinct(distinct_field, query)
         else:
-            results = self.store.find(query)
+            if fields:
+                results = self.store.find(query, fields=fields)
+            else:
+                results = self.store.find(query)  
 
         if sort:
             results = results.sort(sort)
             
-        if start and rows:
-            results = results.limit(int(rows)).skip((start))
+        if start != None and rows:
+            results = results.limit(int(rows)).skip(int(start))
 
         return results
 
