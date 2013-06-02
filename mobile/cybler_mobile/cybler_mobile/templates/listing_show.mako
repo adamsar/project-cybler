@@ -30,7 +30,10 @@ ${listing["created_on"]}
 </div>
 %endif
 
-<p>${listing["description"].replace("\n", "")}</p>
+% for paragraph in listing["descripton"].split("\n")
+<p>${paragraph}</p>
+% endfor 
+
 <script type="text/javascript">
 var interval = null;
 var check = function(){
