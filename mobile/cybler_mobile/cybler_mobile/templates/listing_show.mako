@@ -30,7 +30,7 @@ ${listing["created_on"]}
 </div>
 %endif
 
-% for paragraph in listing["descripton"].split("\n")
+% for paragraph in listing["description"].split("\n"):
 <p>${paragraph}</p>
 % endfor 
 
@@ -49,4 +49,21 @@ var check = function(){
 
 interval = setInterval(check, 1000); //Check every second
 </script>
+</%block>
+
+<%block name="navbar_items">
+% if listing.get("contact", {}).get("phone_number"):
+<!-- Include the phone number if it's a valid listing -->
+<li>
+  <a data-icon="phone" href="tel:${listing['contact']['phone_number']}">
+  </a>
+</li>
+% endif
+% if listing.get("contact", {}).get("email"):
+<!-- Include the phone number if it's a valid listing -->
+<li>
+  <a data-icon="email" href="mailto:${listing['contact']['email']}">
+  </a>
+</li>
+% endif
 </%block>
