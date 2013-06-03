@@ -31,6 +31,7 @@ def process_feed(rss_url, city, state, Parser):
             "state": state,
             "title": listing["title"],
             "description": text.strip_tags(listing.get("summary", "")),
-            "type": Parser.__type__
+            "type": Parser.__type__,
+            "created_on": text.api_date_to_str(listing.get("published_parsed"))
         }
         ingest_element.delay(massaged, Parser)

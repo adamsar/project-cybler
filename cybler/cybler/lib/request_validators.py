@@ -2,7 +2,9 @@
 Code for massaging data in from requests
 """
 from functools import wraps
+from cybler.lib import dates
 import http_statuses
+import datetime
 
 def listing_from_params(params):
     """
@@ -28,7 +30,8 @@ def listing_from_params(params):
             "lat": float(params["lat"]) if params.get("lat") else None,
             "lon": float(params["lon"]) if params.get("lon") else None
             },
-        "images": params["images"].split(",") if params.get("images") else None
+        "images": params["images"].split(",") if params.get("images") else None,
+        "created_on": dates.api_date_to_str(datetime.datetime.utcnow())
     }
 
     if resource["contact"]["city"]:
@@ -40,9 +43,15 @@ def listing_from_params(params):
 
     if not resource["_id"]:
         del resource["_id"]
+        
+    if "created_on" in params:
+        #Confirm that it's well formed
+        try:
+            dates.api_str_to_date(params["created_on"])
+        except:
+            pass
 
     return resource
-
 
     
 def rest_handler(formatter=None, return_status=http_statuses.OK):

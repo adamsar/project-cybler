@@ -130,6 +130,4 @@ class ListingDirectory(CyblerResourceHandler):
         if not resource["contact"].get("zipcode"):
             resource["contact"]["zipcode"] = location["area_code"]
 
-        #Finally, add a timestamp
-        resource["created_on"] = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
         return super(ListingDirectory, self).insert(resource)
