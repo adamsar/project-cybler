@@ -52,7 +52,7 @@ don't clearly).
 
               </a>
             </li>
-            <%block name="nav_bar_items"/>
+            <%block name="navbar_items"/>
             <li>
               <a data-icon="info" href="/about">
               </a>

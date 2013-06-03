@@ -59,10 +59,10 @@ interval = setInterval(check, 1000); //Check every second
   </a>
 </li>
 % endif
-% if listing.get("contact", {}).get("email"):
+% if listing.get("email"):
 <!-- Include the phone number if it's a valid listing -->
 <li>
-  <a data-icon="email" href="mailto:${listing['contact']['email']}">
+  <a data-icon="email" href="mailto:${listing['email']}">
   </a>
 </li>
 % endif
