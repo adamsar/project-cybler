@@ -83,9 +83,6 @@ class ListingDirectory(CyblerResourceHandler):
                 if match.group(1) in AREA_CODES:
                     number = "%s%s%s" % (match.group(1), match.group(2), match.group(3))
                     #Check if it exists in the DB. We don't do multiple listings
-                    if self.query(rows=1, **{"contact.phone_number": number}).count():
-                        log.debug("Phone number %s already exists, aborting" % number)
-                        return
                     resource["contact"]["phone_number"] = number
 
         #Now valid whether or not there's an existing entry in the db
