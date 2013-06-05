@@ -63,8 +63,8 @@ class ListingDirectory(CyblerResourceHandler):
         #First validate that this is definitely not in the DB
         if "url" in resource and "_id" in resource and self.query(rows=1, **{
                 "$or": [
-                    ("url", resource["url"]),
-                    ("_id", resource["_id"])
+                    {"url": resource["url"]},
+                    {"_id": resource["_id"]}
                 ]
         }).count():
             log.debug("Resource %s already exists, aborting" % resource["url"])
