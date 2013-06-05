@@ -23,7 +23,11 @@ class ListingDirectory(CyblerResourceHandler):
         """
         Builds a query based on parameters passed into the app
         """
-        q = {}
+        q = {
+            "$or": {
+                "contact.email": "null"
+            }
+        }
         start, rows = 0, 10
         if "start" in params:
             start = int(params["start"])
@@ -47,6 +51,9 @@ class ListingDirectory(CyblerResourceHandler):
             q["images"] = {
                 "$ne": None
                 }
+        if "all" not in params:
+            q["latest"] = True
+            
         sort = [("created_on", pymongo.DESCENDING)]
         return self.query(start=start, rows=rows, sort=sort, **q)
         
@@ -84,6 +91,12 @@ class ListingDirectory(CyblerResourceHandler):
                         return
                     resource["contact"]["phone_number"] = number
 
+        #Now valid whether or not there's an existing entry in the db
+        if resource.get("contact", {}).get("phone_number"):
+            self.update(q={
+                "contact.phone_number": resource["contact"]["phone_number"]
+                }, values = {"latest": False})
+            
         #Finally process location
         globe = Globe(self.db)
         if "lat" not in resource.get("loc", {}) or not "lon" not in resource.get("loc", {}):
@@ -130,4 +143,6 @@ class ListingDirectory(CyblerResourceHandler):
         if not resource["contact"].get("zipcode"):
             resource["contact"]["zipcode"] = location["area_code"]
 
+        #And set to latest
+        resource["latest"] = True
         return super(ListingDirectory, self).insert(resource)
