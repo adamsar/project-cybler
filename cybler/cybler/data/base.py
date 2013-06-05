@@ -104,5 +104,4 @@ class CyblerResourceHandler(object):
     def update(self, q={}, values={}):
         """Updates entries in the DB based on query q with new
         values values"""
-        q.update({"$set": values})
-        self.store.update(q)
+        self.store.update(q, values, multi=True, upsert=True)
